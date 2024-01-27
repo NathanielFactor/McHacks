@@ -9,12 +9,10 @@ def ai_response(message):
         messages=[
             {
                 "role": "system",
-                "content": """Given a journal entry, you pick out all words that resemble emotion and\
-                respond with all those words separated as a list with commas. Try to pick out the best\
-                overall emotion described within the journal entry and put it first on the list. Also,\
-                add a colour associated with the best overall emotion and add it last to the list\
-                based on colour psychology. For example, if frustrated add the word red at the end\
-                of your response."""
+                "content": """Given a journal entry, you pick out the best overall emotion that should be either happy, sad relaxed, or angry.\
+                    It should only be happy, sad, relaxed, or angry, nothing else.\
+                    Also, add a colour associated with the best overall emotion and add it last to the list based on colour psychology.\
+                    For example, if relaxed add the word grey at the end of your response."""
             },
             {
                 "role": "user",

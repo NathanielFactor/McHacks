@@ -1,3 +1,4 @@
+import os
 from openai import OpenAI
 
 client = OpenAI()
@@ -8,11 +9,11 @@ def ai_response(message):
         messages=[
             {
                 "role": "system",
-                "content": """Pick out keywords from the response that involve emotions."""
+                "content": """Given a journal entry, you pick out all words that resemble emotion and respond with all those words separated as a list with commas. Try to pick out the best overall emotion described within the journal entry and put it first in the list."""
             },
             {
-                "role": "user", #add the discord user as another function input
-                "content": message #change this into the most optimal prompt for the ai
+                "role": "user",
+                "content": message
             }
         ],
         temperature = 1,

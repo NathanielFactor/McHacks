@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood-based Calendar Journal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href='https://unpkg.com/fullcalendar@5/main.min.css' rel='stylesheet' />
+    <script src='https://unpkg.com/fullcalendar@5/main.min.js'></script>
+
+</head>
+<body>
+
+    <!-- Add this inside your <body> tag -->
+<div id='calendar'></div>
+
+<!-- Mood and Journal Input Modal -->
+<div id="moodJournalModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <!-- Existing mood and journal input sections here -->
+        <!-- ... -->
+        <div class="container">
+            <div id="moodInputSection">
+                <h2>How are you feeling today?</h2>
+                <div id="moodButtons">
+                    <button class="moodButton" onclick="setMood('Happy')">😊 Happy</button>
+                    <button class="moodButton" onclick="setMood('Sad')">😢 Sad</button>
+                    <button class="moodButton" onclick="setMood('Angry')">😠 Angry</button>
+                    <button class="moodButton" onclick="setMood('Excited')">😆 Excited</button>
+                    <button class="moodButton" onclick="setMood('Tired')">😴 Tired</button>
+                </div>
+                
+                <button onclick="saveMood()">Save</button>
+            </div>
+            <div id="journalSection">
+                <h2>Today's Journal</h2>
+                <textarea id="journalEntry" placeholder="What's on your mind?"></textarea>
+                <button onclick="saveJournal()">Save Journal</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

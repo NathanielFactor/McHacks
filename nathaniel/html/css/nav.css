@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Work+Sans:400,600');
 body{
     margin: 0;
-    background: #222;
-    font-family: 'Work sans', sans-serif;
+    background: #383535;
+    font-family: Arial, sans-serif;
     font-weight: 300;
 }
 
@@ -21,6 +21,8 @@ header::after{
 }
 
 .logo{
+    max-width: 5%;
+    max-height: 5%;
     float: left;
     padding: 10px 0;
 }

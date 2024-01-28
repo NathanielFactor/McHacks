@@ -15,18 +15,20 @@ body{
 
 }
 
-.container{
+
+.diaryWrap{
     width:100%;
-    max-width:1200px;
-    height:100vh;
+    
     margin:0 auto;
-    display:flex;
+    display: flex;
+    float:right;
+    clear:right;
     flex-direction:column;
     background-color:#C0D7E7;                          /*background colour of the page yellow: #f6e58d      light blue:#C0D7E7*/    
     padding:25px 10px;
 }
 @media only screen and (min-width:640px){
-    .container{
+    .diaryWrap{
         min-height:550px;
         box-shadow: 5px 5px 15px rgb(96, 95, 95)        /*box shadow*/
     }
@@ -53,6 +55,8 @@ body{
     border:none;
     border-bottom: 1px solid black;
     font-size:20px;
+    font-family:cursive;
+
 }
 .line:disabled{
     color:black;
@@ -75,18 +79,21 @@ body{
     font-size:15px;                                         /*font size of the date*/
     max-width:250px;
     font-family:cursive;
+
 }
 
 .btn{
     max-width:100px;
     padding:10px 15px;
     border:none;
-    margin-top:25px;
+    margin-top:20px;
     font-size:13px;
     font-family:cursive;
     background-color: #0288d1;                                /*button colour             either just colour "green" if yellow background or #0288d1 for blue background*/
     color:white;                                            /*"Save entry colour"*/
     border-radius:200px;
+    margin-left:auto;
+    margin-right:auto;
 }
 
 .btn:hover{
@@ -103,18 +110,19 @@ body{
 
 .submit{
     max-width:100px;
-    width:350px;
     padding:10px 15px;
     border:none;
-    margin-top:25px;
+    margin-top:20px;
     font-size:13px;
     font-family:cursive;
     background-color: #0288d1;                                /*button colour             either just colour "green" if yellow background or #0288d1 for blue background*/
     color:white;                                            /*"Save entry colour"*/
     border-radius:200px;
-    position:absolute;
-    margin-left:150px;
-    margin-top:690px;
+    margin-left:auto;
+    margin-right:auto;
+    
+
+
     
 }
 

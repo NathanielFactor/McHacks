@@ -65,41 +65,115 @@
 
 
 <!DOCTYPE html>
-<html lang="en">
+
+<html>
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homepage</title>
+    <title>Playlist</title>
+
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #383535;
-            margin: 0;
+        body{
+            margin: 0; 
             padding: 0;
+            box-sizing: border-box;
+            font-family: 'Lobster', cursive;
         }
-        h1 {
-            font-family: Arial, sans-serif;
-            background-color: #383535;
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url(https://i.redd.it/akfqd7mvcss51.jpg) center/cover no-repeat fixed;
+            filter: blur(2px); /* Adjust the value for the desired blur effect */
+            z-index: -1; /* Place the pseudo-element behind the content */
         }
+
+        .quote-wrap {
+            width:450px;
+            top: 45%;
+            right: 15%;
+            transform: translate(0, -50%);
+            color: white;
+            font-size: 30px;
+            font-family: 'Lobster', cursive;
+            text-align: center;
+            position: fixed;
+            border:none;
+            background:linear-gradient(#8c5950,#3e2723);
+            border-radius:100px;
+            padding:25px 25px 30px;
+        }
+        .quote-wrap textarea{
+            width: 75%;
+            padding:15px;
+            border-radius:20px;
+            outline: none;
+            resize: none;
+            font-size: 20px;
+            color: white;
+            background-color: #3e2723;
+            border-color: #3e2723;
+            font-family: 'Lobster', cursive;
+            text-align: center;
+            font-weight: bold;
+        }
+        .quote-wrap h2{
+            color: white;
+            text-align: center;
+            font-size: 30px;
+            font-family: 'Lobster', cursive;
+        }
+
+        .quote-wrap p{
+            color: white;
+            text-align: center;
+            font-size: 18px;
+            font-family: 'Lobster', cursive;
+        }
+
+
     </style>
 </head>
 
 <body>
-    
-    <h1>Mood-based Spotify Playlist Generator</h1>
-    
-<div id="content">
-    <h2>Discover a playlist that matches your mood!</h2>
-    <button onclick="generatePlaylist()">Generate Playlist</button>
-</div>
+    <iframe style="border-radius:12px; margin-left:150px;" src="https://open.spotify.com/embed/playlist/2toDBwzIhzyvBxnCvoTXIY?utm_source=generator"width="30%" height=800vh frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    <div class="quote-wrap">
+        <h2>Quote of the Day</h2>
+        <p id="quoteText">Loading quote...</p>
+    </div>
 
-<script>
-    function generatePlaylist() {
-        // Implement backend logic here (redirecting to Spotify is just for example purposes).
-        alert("Playlist generated! Redirecting to Spotify...");
-        // window.location.href = "/generatePlaylist";
-    }
-</script>
+    <script>
+        const quoteText = document.getElementById("quoteText");
 
+        // Function to fetch the generated quote from the backend
+        async function fetchGeneratedQuote() {
+            try {
+                // Make a POST request to your backend endpoint
+                const response = await fetch('/api/generate-quote', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ prompt: 'Your prompt here' }),
+                });
+
+                const data = await response.json();
+
+                // Update the <p> tag with the generated quote
+                quoteText.innerText = data.quote;
+            } catch (error) {
+                console.error('Error fetching quote:', error);
+            }
+        }
+
+        // Call the function to fetch and display the generated quote
+        fetchGeneratedQuote();
+    </script>
 </body>
+
 </html>
+

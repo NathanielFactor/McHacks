@@ -89,5 +89,5 @@ function handleButtonClick() {
 function enableButtonClick() {
     document.getElementById("calendarButton").disabled = false;
     
-}
+} 
 

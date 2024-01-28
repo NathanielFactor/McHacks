@@ -3,7 +3,7 @@ from datetime import datetime
 from bot import ai_response
 
 # Connect to the SQLite database
-connection = sqlite3.connect('your_database_file.db')
+connection = sqlite3.connect('database.db')
 cursor = connection.cursor()
 
 def checkTodayEntry():

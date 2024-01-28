@@ -29,11 +29,10 @@ def get_response(cursor, user_id, entry_date):
     return row["JournalEntry"] if row else None
 
 def main():
-    database_file = 'your_database_file.db'
+    database_file = 'database.db'
     with connect_to_database(database_file) as connection:
         cursor = connection.cursor()
         
-        user_id = 'example_user_id'
         message = 'example_message'
         entry_date = 'example_entry_date'
 

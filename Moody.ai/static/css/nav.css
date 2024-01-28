@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Work+Sans:400,600');
 body{
     margin: 0;
-    background: #383535;
+    background: linear-gradient(to bottom,gray, #383535);
     font-family: 'Lobster', cursive;
     font-weight: 300;
 }
@@ -9,6 +9,7 @@ body{
 .container{
     width: 100%;
     margin: 0 auto;
+ 
 }
 
 header {
@@ -74,17 +75,65 @@ nav a::before{
 nav a:hover::before{
     width: 100%;
 }
-.img{
-    background-image: url('https://www.google.com/url?sa=i&url=https%3A%2F%2Fgifdb.com%2Fgif%2Faesthetic-anime-pixelated-background-bnuuk8wf00lrrcvf.html&psig=AOvVaw0a6UCIpUB4H7PpQ1ucs0Dq&ust=1706528515129000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCMDCtKKAgIQDFQAAAAAdAAAAABAD');
+.happy{
+    background-image: url('https://media.tenor.com/PpoGYRtmLFoAAAAj/smile-happy.gif');
     background-size:cover;
     background-position:center;
-    height:300px;
-    width:300px;
+    height:650px;
+    width:500px;
     border-radius:50%;
+    margin-right:auto;
+    margin-right:100px;
+    margin-top:60px;
     overflow: hidden;
 }
-.img img {
+.happy img {
     width: 100%; /* Make the image fill the entire container */
     height: 100%; /* Make the image fill the entire container */
     object-fit: cover; 
 }
+
+.text {
+    width:800px;
+    top: 55%;
+    right: 5%;
+    transform: translate(0, -50%);
+    color: black;
+    font-size: 30px;
+    font-family: 'Lobster', cursive;
+    text-align: center;
+    position: fixed;
+    border:none;
+    background:linear-gradient(#FADA5E,#FAC700);
+    border-radius:100px;
+    padding:25px 25px 30px;
+}
+.text textarea{
+    width: 75%;
+    padding:15px;
+    border-radius:20px;
+    outline: none;
+    resize: none;
+    font-size: 20px;
+    color: black;
+    background-color: #3e2723;
+    border-color: #3e2723;
+    font-family: 'Lobster', cursive;
+    text-align: center;
+    font-weight: bold;
+}
+.text h2{
+    color: black;
+    text-align: center;
+    font-size: 30px;
+    font-family: 'Lobster', cursive;
+}
+
+.text p{
+    color: black;
+    text-align: center;
+    font-size: 18px;
+    font-family: 'Lobster', cursive;
+}
+
+

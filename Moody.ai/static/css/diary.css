@@ -12,6 +12,7 @@ body{
     align-items: center;
     justify-items: center;
     background-color: lightgray;
+    overflow: hidden;
 
 }
 
@@ -112,7 +113,7 @@ body{
     max-width:100px;
     padding:10px 15px;
     border:none;
-    margin-top:20px;
+    margin-top:10px;
     font-size:13px;
     font-family:cursive;
     background-color: #0288d1;                                /*button colour             either just colour "green" if yellow background or #0288d1 for blue background*/

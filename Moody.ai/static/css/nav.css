@@ -4,6 +4,7 @@ body{
     background: linear-gradient(to bottom,gray, #383535);
     font-family: 'Lobster', cursive;
     font-weight: 300;
+    overflow: hidden;
 }
 
 .container{

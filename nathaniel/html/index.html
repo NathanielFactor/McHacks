@@ -5,6 +5,22 @@
     <meta charset="UTF-8">
     <title>Navbar</title>
     <script>
+        // Dummy function to simulate user authentication status
+        function isLoggedIn() {
+            // Replace this with your actual authentication check logic
+            return false;  // Change to true if the user is logged in
+        }
+
+        function updateLoginText() {
+            var loginLink = document.getElementById("login-link");
+
+            if (isLoggedIn()) {
+                loginLink.textContent = "Account";
+            } else {
+                loginLink.textContent = "Login";
+            }
+        }
+
         function loadContent(contentType) {
             // Load content dynamically based on the clicked link
             var container = document.getElementById("content-container");
@@ -16,22 +32,27 @@
                 .then(data => {
                     container.innerHTML = data;
                 });
-            }
+        }
+
+        // Update login text when the page loads
+        window.onload = function() {
+            updateLoginText();
+        };
     </script>
 </head>
 
 <body>
     <header>
         <div class="container">
-            <a href="#" onclick="loadContent('home')">
+            <a href="#" onclick="loadContent('calendar')">
                 <img src="nathaniel/static/236-2362818_anime-sempai-animegirl-heart-kawaii-cute-anime-girl.png" alt="logo" class="logo">
             </a>
             <nav>
                 <ul>
-                    <li><a href="#" onclick="loadContent('home')">Home</a></li>
                     <li><a href="#" onclick="loadContent('calendar')">Calendar</a></li>
                     <li><a href="#" onclick="loadContent('journal')">Journal</a></li>
                     <li><a href="#" onclick="loadContent('playlist')">Playlist</a></li>
+                    <li><a id="login-link" href="#" onclick="loadContent('login')">Login</a></li>
                 </ul>
             </nav>
         </div>

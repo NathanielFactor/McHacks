@@ -11,6 +11,9 @@ function generateCalendar() {
     const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
 
     const colorArray = [daysInMonth];  // set cell colors to white 
+    for (i = 0; i < daysInMonth; i++) {
+        colorArray[i] = '#ffffff8b'
+    }
         
     const table = document.createElement('table');
     container.appendChild(table);
@@ -36,6 +39,7 @@ function generateCalendar() {
 
                 td.style.backgroundColor = colorArray[dayCounter - 1]; //set background colour using colorArrray
                 td.className = 'color' + dayCounter;
+            
                 td.addEventListener('click', function () {
                     openModal(dayCounter);
                 });
@@ -86,8 +90,13 @@ function handleButtonClick() {
    
 }
 
-function enableButtonClick() {
+function eleButtonClick() {
     document.getElementById("calendarButton").disabled = false;
     
 } 
+
+//function changeColor(color, dayOfMonth) {
+  //  var colorObj = "color"+ dayOfMonth;
+    //td.colorObj { background-color: #ffffff; }
+//}]
 

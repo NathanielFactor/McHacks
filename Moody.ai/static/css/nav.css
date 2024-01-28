@@ -2,7 +2,7 @@
 body{
     margin: 0;
     background: #383535;
-    font-family: Arial, sans-serif;
+    font-family: 'Lobster', cursive;
     font-weight: 300;
 }
 
@@ -12,7 +12,7 @@ body{
 }
 
 header {
-    background: #55daa5;
+    background: #3f4643;
 }
 header::after{
     content: '';
@@ -46,7 +46,7 @@ nav li{
 }
 
 nav a {
-    color: #444;
+    color: #eee0e0;
     text-decoration: none;
     text-transform: uppercase;
     font-size: 14px;
@@ -55,14 +55,14 @@ nav a {
     display: inline-block;
 }
 nav a:hover{
-    color: #000;
+    color: #ffffff;
 }
 nav a::before{
     content:'';
     display: block;
     height: 5px;
     width: 100%;
-    background-color: #444;
+    background-color: #ffffff;
 
     position: absolute;
     top: 0;

@@ -77,7 +77,17 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Lobster', cursive;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background: url(https://i.redd.it/akfqd7mvcss51.jpg) center/cover no-repeat fixed;
+            filter: blur(2px); /* Adjust the value for the desired blur effect */
+            z-index: -1; /* Place the pseudo-element behind the content */
         }
 
         .quote-wrap {
@@ -128,13 +138,39 @@
 </head>
 
 <body>
-    <br>
-    <iframe style="border-radius:12px; margin-left:150px;" src="https://open.spotify.com/embed/playlist/3cEYpjA9oz9GiPac4AsH4n?utm_source=generator"width="30%" height=600vh frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    <iframe style="border-radius:12px; margin-left:150px;" src="https://open.spotify.com/embed/playlist/2toDBwzIhzyvBxnCvoTXIY?utm_source=generator"width="30%" height=800vh frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
     <div class="quote-wrap">
         <h2>Quote of the Day</h2>
-        <p>Text Text Text Text Text</p>
+        <p id="quoteText">Loading quote...</p>
     </div>
-    
+
+    <script>
+        const quoteText = document.getElementById("quoteText");
+
+        // Function to fetch the generated quote from the backend
+        async function fetchGeneratedQuote() {
+            try {
+                // Make a POST request to your backend endpoint
+                const response = await fetch('/api/generate-quote', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ prompt: 'Your prompt here' }),
+                });
+
+                const data = await response.json();
+
+                // Update the <p> tag with the generated quote
+                quoteText.innerText = data.quote;
+            } catch (error) {
+                console.error('Error fetching quote:', error);
+            }
+        }
+
+        // Call the function to fetch and display the generated quote
+        fetchGeneratedQuote();
+    </script>
 </body>
 
 </html>

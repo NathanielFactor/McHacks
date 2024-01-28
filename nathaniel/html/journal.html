@@ -1,160 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href="{{url_for('static', filename='css/nav.css')}}" rel="stylesheet" type="text/css">
+
+    <link href="{{url_for('static', filename='css/diary.css')}}" rel="stylesheet" type="text/css">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Journal Template</title>
-    <style>
-        body {
-            font-family: "Times New Roman", Times, serif;
-            background-color: #383535;
-            margin: 0;
-            padding: 0;
-            color: #fff;
-        }
-
-        #content {
-            max-width: 600px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            line-height: 1.6;
-            color: #333; /* Text color for content */
-        }
-
-        h1 {
-            text-align: center;
-            color: #ffffff; /* Header color */
-        }
-
-        h2 {
-            color: #ffffff;
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-
-        p {
-            color: #555;
-            font-size: 16px;
-            margin-bottom: 15px;
-        }
-
-        hr {
-            border: 1px solid #ddd;
-            margin: 20px 0;
-        }
-
-        blockquote {
-            border-left: 3px solid #1db954;
-            padding-left: 15px;
-            color: #666;
-            font-style: italic;
-            margin: 0;
-        }
-
-        ul {
-            list-style: square;
-            margin-left: 20px;
-        }
-
-        ol {
-            list-style: decimal;
-            margin-left: 20px;
-        }
-
-        textarea {
-            width: 100%;
-            height: 150px;
-            padding: 8px;
-            margin-bottom: 15px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            resize: vertical;
-        }
-
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            background-color: #1db954;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-        }
-
-        button:hover {
-            background-color: #168f3a;
-        }
-    </style>
-
+    <title>Navbar</title>
     <script>
-        function redirectToCalendar() {
-            // Collect form data
-            var entryTitle = document.getElementById("entryTitle").value;
-            var entryDate = document.getElementById("entryDate").value;
-            var entryText = document.getElementById("entryText").value;
-    
-            // Client-side validation (you can add more validation logic as needed)
-            if (!entryTitle || !entryDate || !entryText) {
-                alert("Please fill in all fields.");
-                return false;
-            }
-    
-            // Create JSON object
-            var entryData = {
-                date: entryDate,
-                text: entryText
-            };
-    
-            // Convert JSON object to a string
-            var jsonString = JSON.stringify(entryData);
-    
-            // Send data to the server (replace 'your-server-endpoint' with your actual server endpoint)
-            fetch('your-server-endpoint', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: jsonString,
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Success:', data);
-                alert("Journal entry saved successfully.");
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-                alert("Failed to save journal entry. Please try again.");
-            });
-    
-            // Redirect to the calendar page
-            // window.location.href = 'calendar.html';
-    
-            return false;  // Prevent the default form submission behavior
-        }
     </script>
 </head>
+
 <body>
+    <header>
+        <div class="container">
+            <a href="{{url_for('index')}}">
+                <img src="{{url_for('static', filename='images/236-2362818_anime-sempai-animegirl-heart-kawaii-cute-anime-girl.png')}}" alt="logo" class="logo">
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="{{url_for('calendar')}}" onclick="">Calendar</a></li>
+                    <li><a href="{{url_for('journal')}}">Journal</a></li>
+                    <li><a href="{{url_for('playlist')}}">Playlist</a></li>
+                    <li><a href="{{url_for('login')}}" >Login</a></li>
+                </ul>
+            </nav>
+            
+<div class="diaryWrap">
 
-    <h1>Journal Template</h1>
-
-    <div id="content">
-        <form onsubmit="return redirectToCalendar();">
-            <label for="entryTitle">Entry Title:</label>
-            <input type="text" id="entryTitle" name="entryTitle" placeholder="Enter the title" required>
-
-            <label for="entryDate">Date:</label>
-            <input type="text" id="entryDate" name="entryDate" placeholder="Enter the date" required>
-
-            <label for="entryText">Journal Entry:</label>
-            <textarea id="entryText" name="entryText" placeholder="Write your thoughts here..." required></textarea>
-
-            <button type="submit">Save Entry</button>
-        </form>
+    <div class="date-wrap">
+        <span>Date:</span>
+        <input type="date" class="date"/>
+    </div>
+    <!--copy paste this next part to add more lines
+    <div class="line-wrap">
+        <input type="text" class="line"/>
     </div>
 
+    CURRENT LINE COUNT:10 actually idk 
+    -->
+    <div class="line-wrap">
+        <input type="text" class="line"/>
+    </div>
+    <div class="line-wrap">
+        <input type="text" class="line"/>
+    </div>
+    <div class="line-wrap">
+        <input type="text" class="line"/>
+    </div>
+    <div class="line-wrap">
+        <input type="text" class="line"/>
+    </div>
+    <div class="line-wrap">
+        <input type="text" class="line"/>
+    </div>
+    <div class="line-wrap">
+        <input type="text" class="line"/>
+    </div>
+    <div class="line-wrap">
+        <input type="text" class="line"/>
+    </div>
+    <div class="line-wrap">
+        <input type="text" class="line"/>
+    </div>
+    <div class="line-wrap">
+        <input type="text" class="line"/>
+    </div>
+    <div class="line-wrap">
+        <input type="text" class="line"/>
+    </div>
+    <div class="line-wrap">
+        <input type="text" class="line"/>
+    </div>
+    <div class="line-wrap">
+        <input type="text" class="line"/>
+    </div>
+
+
+
+    <button class="btn">Save entry</button>     
+    <button class="submit">Submit</button>                          <!--CAN CHANGE NAME OF BUTTON-->
+
+</div>
+
+    <!--JAVASCRIPT PART FOR THE BUTTON-->
+    <script>                                                                    //max length of lines 
+        const lines=document.querySelectorAll(".line");
+        const button=document.getElementsByClassName("btn")[0];
+        let save=true;
+
+        const saveEdit=()=>{  
+            if(save){
+                button.innerHTML='Edit';
+                save=false;
+            }else{
+                button.innerHTML='Save';
+                save=true;
+            }      
+            
+            button.classList.toggle("edit-btn");
+            lineControls();
+        }
+
+        const lineControls=()=>{
+           lines.forEach(line=>{
+               if(!save){
+                   line.setAttribute("disabled",true);
+               }else{
+                    line.removeAttribute("disabled");
+               }
+           });
+        }
+
+        const setLinesMaxWidth=()=>{
+            lines.forEach(line=>{
+                line.setAttribute("maxlength", line.offsetWidth/12);
+            });
+        }
+
+        setLinesMaxWidth();
+
+        button.addEventListener("click", saveEdit);
+
+        window.addEventListener("resize",setLinesMaxWidth);
+
+         
+    </script>
+    </header>
+    <br>
+   
+    
 </body>
 </html>
+
+
+    
+   

@@ -260,6 +260,14 @@ def create_spotify_oauth():
         redirect_uri= 'http://127.0.0.1:5000/callback',
         scope="user-library-read playlist-modify-public playlist-modify-private user-read-recently-played user-top-read"
     )
+    
+@app.route('/api/generate-quote', methods=['POST'])
+def generate_quote(mood):
+
+    # Use your OpenAI integration to generate a response based on the prompt
+    generated_response = bot2.ai_response2(mood)
+
+    return jsonify({'quote': generated_response})
 
 
 AUTH_URL = "https://accounts.spotify.com/authorize"

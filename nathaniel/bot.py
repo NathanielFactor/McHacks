@@ -1,7 +1,11 @@
 import os
 from openai import OpenAI
 
-client = OpenAI()
+# Set your OpenAI API key here
+openai_api_key = "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"
+
+# Initialize the OpenAI client with your API key
+client = OpenAI(api_key=openai_api_key)
 
 def ai_response(message):
     response = client.chat.completions.create(
@@ -11,8 +15,7 @@ def ai_response(message):
                 "role": "system",
                 "content": """Given a journal entry, you pick out the best overall emotion that should be either happy, sad relaxed, or angry.\
                     It should only be happy, sad, relaxed, or angry, nothing else.\
-                    Also, add a colour associated with the best overall emotion and add it last to the list based on colour psychology.\
-                    For example, if relaxed add the word grey at the end of your response."""
+                """
             },
             {
                 "role": "user",

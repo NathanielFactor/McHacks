@@ -1,7 +1,11 @@
 import os
 from openai import OpenAI
 
-client = OpenAI(api_key="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")
+# Set your OpenAI API key here
+openai_api_key = "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"
+
+# Initialize the OpenAI client with your API key
+client = OpenAI(api_key=openai_api_key)
 
 def ai_response(message):
     response = client.chat.completions.create(

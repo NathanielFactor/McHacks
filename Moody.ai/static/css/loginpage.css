@@ -24,8 +24,12 @@ body::before {
     background: #20639b;                          /*inner textbox background colour, feel free to change TO SPOTIFY THEME*/  
     color:#fff;
     display:flex;                                   /*text colour:login, remember me, dont have an account, logo colours*/
+    flex-direction:column;
+    align-items: center;
+    margin:auto;
+    margin-top:20px;
     border-radius:10px;
-    padding:30px 40px
+    padding:30px 40px;
 }
 
 .wrapper h1{
@@ -52,6 +56,10 @@ body::before {
     margin-top:20px;                        /*vertical distance between the login button and the remember me and forgot password text*/  
 }
 
+.wrapper .btn:hover{
+    background:grey;
+    color:#fff;
+}
 
 
 

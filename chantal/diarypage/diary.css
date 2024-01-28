@@ -1,3 +1,125 @@
 *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline:none;
+}
+
+body{
+    font-size: 20px;
+    font-family:sans-serif;                             /*change font*/
+    display:flex;
+    align-items: center;
+    justify-items: center;
+    background-color: lightgray;
+
+}
+
+
+.container{
+    width:100%;
+    max-width:1200px;
+    height:100vh;
+    margin:0 auto;
+    display:flex;
+    flex-direction:column;
+    background-color:#C0D7E7;                          /*background colour of the page yellow: #f6e58d      light blue:#C0D7E7*/    
+    padding:25px 10px;
+}
+@media only screen and (min-width:640px){
+    .container{
+        min-height:550px;
+        box-shadow: 5px 5px 15px rgb(96, 95, 95)        /*box shadow*/
+    }
+}
+
+.line-wrap{
+    margin-bottom:10px;
+    display:flex;
+}
+
+.line-wrap::after{
+    content: "";
+    display:inline-block;
+    width: 15px;
+    height:15px;
+    border-radius:50%;
+    margin-left:10px;
+    background-color:#fff;
+}
+
+.line{
+    width:100%;
+    background-color:transparent;
+    border:none;
+    border-bottom: 1px solid black;
+    font-size:20px;
+}
+.line:disabled{
+    color:black;
+}
+
+.line-wrap:last-of-type{
+    margin-bottom:0;
+}
+
+.date-wrap{
+    margin-bottom:20px;
+    font-size:15px;                                         /*font size of the "Date" text*/
+    font-family:cursive;
+}
+
+.date{
+    border:none;
+    border-bottom:1px solid black;
+    background-color:transparent;
+    font-size:15px;                                         /*font size of the date*/
+    max-width:250px;
+    font-family:cursive;
+
+}
+
+.btn{
+    max-width:100px;
+    padding:10px 15px;
+    border:none;
+    margin-top:25px;
+    font-size:13px;
+    font-family:cursive;
+    background-color: #0288d1;                                /*button colour             either just colour "green" if yellow background or #0288d1 for blue background*/
+    color:white;                                            /*"Save entry colour"*/
+    border-radius:200px;
+}
+
+.btn:hover{
+    background-color:darkblue                          /*button colour when you hover on it for yellow:dark green             for blue:#0277bd*/     
+}
+
+.edit-btn{
+    background-color: red;
+}
+
+.edit-btn:hover{
+    background-color: darkred;
+}
+
+.submit{
+    max-width:100px;
+    width:350px;
+    padding:10px 15px;
+    border:none;
+    margin-top:25px;
+    font-size:13px;
+    font-family:cursive;
+    background-color: #0288d1;                                /*button colour             either just colour "green" if yellow background or #0288d1 for blue background*/
+    color:white;                                            /*"Save entry colour"*/
+    border-radius:200px;
+    position:absolute;
+    margin-left:150px;
+    margin-top:690px;
     
+}
+
+.submit:hover{
+    background-color:green                         /*button colour when you hover on it for yellow:dark green             for blue:#0277bd*/     
 }

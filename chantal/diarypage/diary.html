@@ -8,47 +8,124 @@
     <link rel="stylesheet" href="diary.css">
 </head>
 <body>
-    <div class=""container">
+    <div class="container">
+        <div class="date-wrap">
+            <span>Date:</span>
+            <input type="text" class="date"/>
+        </div>
         <!--copy paste this next part to add more lines
-        <div class=""line-wrap">
-            <input type=""text" class="line"/>
-        </div>
-        -->
-        <div class=""line-wrap">
-            <input type=""text" class="line"/>
-        </div>
-        <div class=""line-wrap">
-            <input type=""text" class="line"/>
-        </div>
-        <div class=""line-wrap">
-            <input type=""text" class="line"/>
-        </div>
-        <div class=""line-wrap">
-            <input type=""text" class="line"/>
-        </div>
-        <div class=""line-wrap">
-            <input type=""text" class="line"/>
-        </div>
-        <div class=""line-wrap">
-            <input type=""text" class="line"/>
-        </div>
-        <div class=""line-wrap">
-            <input type=""text" class="line"/>
-        </div>
-        <div class=""line-wrap">
-            <input type=""text" class="line"/>
-        </div>
-        <div class=""line-wrap">
-            <input type=""text" class="line"/>
-        </div>
-        <div class=""line-wrap">
-            <input type=""text" class="line"/>
+        <div class="line-wrap">
+            <input type="text" class="line"/>
         </div>
 
+        CURRENT LINE COUNT:10 actually idk 
+        -->
+        <div class="line-wrap">
+            <input type="text" class="line"/>
+        </div>
+        <div class="line-wrap">
+            <input type="text" class="line"/>
+        </div>
+        <div class="line-wrap">
+            <input type="text" class="line"/>
+        </div>
+        <div class="line-wrap">
+            <input type="text" class="line"/>
+        </div>
+        <div class="line-wrap">
+            <input type="text" class="line"/>
+        </div>
+        <div class="line-wrap">
+            <input type="text" class="line"/>
+        </div>
+        <div class="line-wrap">
+            <input type="text" class="line"/>
+        </div>
+        <div class="line-wrap">
+            <input type="text" class="line"/>
+        </div>
+        <div class="line-wrap">
+            <input type="text" class="line"/>
+        </div>
+        <div class="line-wrap">
+            <input type="text" class="line"/>
+        </div>
+        <div class="line-wrap">
+            <input type="text" class="line"/>
+        </div>
+        <div class="line-wrap">
+            <input type="text" class="line"/>
+        </div>
+        <div class="line-wrap">
+            <input type="text" class="line"/>
+        </div>
+        <div class="line-wrap">
+            <input type="text" class="line"/>
+        </div>
+        <div class="line-wrap">
+            <input type="text" class="line"/>
+        </div>
+        <div class="line-wrap">
+            <input type="text" class="line"/>
+        </div>
+        <div class="line-wrap">
+            <input type="text" class="line"/>
+        </div>
+        <div class="line-wrap">
+            <input type="text" class="line"/>
+        </div>
+        <div class="line-wrap">
+            <input type="text" class="line"/>
+        </div>
+
+        <button class="btn">Save entry</button>     
+        <button class="submit">Submit</button>                          <!--CAN CHANGE NAME OF BUTTON-->
 
     </div>
 
-   
+        <!--JAVASCRIPT PART FOR THE BUTTON-->
+        <script>                                                                    //max length of lines 
+            const lines=document.querySelectorAll(".line");
+            const button=document.getElementsByClassName("btn")[0];
+            let save=true;
+
+            const saveEdit=()=>{  
+                if(save){
+                    button.innerHTML='Edit';
+                    save=false;
+                }else{
+                    button.innerHTML='Save';
+                    save=true;
+                }      
+                
+                button.classList.toggle("edit-btn");
+                lineControls();
+            }
+
+            const lineControls=()=>{
+               lines.forEach(line=>{
+                   if(!save){
+                       line.setAttribute("disabled",true);
+                   }else{
+                        line.removeAttribute("disabled");
+                   }
+               });
+            }
+
+            const setLinesMaxWidth=()=>{
+                lines.forEach(line=>{
+                    line.setAttribute("maxlength", line.offsetWidth/12);
+                });
+            }
+
+            setLinesMaxWidth();
+
+            button.addEventListener("click", saveEdit);
+
+            window.addEventListener("resize",setLinesMaxWidth);
+
+             
+        </script>
    
 </body>
 </html>

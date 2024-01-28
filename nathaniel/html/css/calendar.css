@@ -1,0 +1,29 @@
+body {
+    font-family: 'Times New Roman', sans-serif;
+    text-align: center;
+}
+
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #8575a0;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #bb85c7db;
+}
+
+td {
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+td:hover {
+    background-color: #9d9898;
+}

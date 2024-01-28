@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login with Spotify</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="container">
+        <button class="login-button" onclick="openLoginPopup()">Login to Spotify</button>
+    </div>
+
+    <!-- Popup Container -->
+    <div id="loginPopup" class="popup-container">
+        <div class="login-box">
+            <span class="close" onclick="closeLoginPopup()">&times;</span>
+            <img src="nathaniel\static\Spotify_icon.svg.webp" alt="Spotify Logo" class="logo">
+            <h2>Login to Spotify</h2>
+            <form action="#" method="POST">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+
+                <button type="submit">Log In</button>
+            </form>
+            <p>Don't have an account? <a href="#">Sign Up</a></p>
+        </div>
+    </div>
+
+    <script>
+        function openLoginPopup() {
+            document.getElementById("loginPopup").style.display = "block";
+        }
+
+        function closeLoginPopup() {
+            document.getElementById("loginPopup").style.display = "none";
+        }
+    </script>
+
+</body>
+</html>
+

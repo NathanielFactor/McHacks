@@ -138,13 +138,20 @@
 </head>
 
 <body>
-    <iframe style="border-radius:12px; margin-left:150px;" src="https://open.spotify.com/embed/playlist/2toDBwzIhzyvBxnCvoTXIY?utm_source=generator"width="30%" height=800vh frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    <iframe id="spotifyIframe" style="border-radius:12px; margin-left:150px;" src="https://open.spotify.com/embed/playlist/2toDBwzIhzyvBxnCvoTXIY?utm_source=generator"width="30%" height=800vh frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
     <div class="quote-wrap">
         <h2>Quote of the Day</h2>
         <p id="quoteText">Loading quote...</p>
     </div>
 
     <script>
+        const idFromFlask = "{{ id }}"; // Replace with how you pass the 'id' variable from Flask
+        console.log(idFromFlask)
+        const spotifyIframe = document.getElementById('spotifyIframe');
+        spotifyIframe.src = `https://open.spotify.com/embed/playlist/${idFromFlask}?utm_source=generatortheme=white&view=coverart`;
+        setTimeout(function() {
+            spotifyIframe.contentWindow.location.reload();
+        }, 100);
         const quoteText = document.getElementById("quoteText");
 
         // Function to fetch the generated quote from the backend

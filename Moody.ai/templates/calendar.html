@@ -291,6 +291,9 @@ function openModal(selectedDay) {
             const modal = document.getElementById('myModal');
             const selectedDayText = document.getElementById('selectedDayText');
             const selectedMood = document.getElementById('moodText');
+            if (data.message=="login"){
+                window.location.href = '/login';
+            }
             selectedDayText.textContent = data.message; // Set the modal text to the message fetched
             selectedMood.textContent = data.mood;
             modal.style.display = 'flex';

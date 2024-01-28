@@ -109,8 +109,8 @@
                 .then(data => {
                     console.log('Success:', data);
                     if (data['success']) {
-                    window.location.href = '/playlist';
-                }
+                    window.location.href = '/genPlaylist?date=' + dateInput;
+                    } 
                 })
                 .catch((error) => {
                     console.error('Error:', error);

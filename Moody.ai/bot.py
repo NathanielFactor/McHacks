@@ -2,7 +2,7 @@ import os
 from openai import OpenAI
 
 # Set your OpenAI API key here
-openai_api_key = "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"
+openai_api_key = "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"
 
 # Initialize the OpenAI client with your API key
 client = OpenAI(api_key=openai_api_key)
@@ -14,7 +14,7 @@ def ai_response(message):
             {
                 "role": "system",
                 "content": """Given a journal entry, you pick out the best overall emotion that should be either happy, sad relaxed, or angry.\
-                    It should only be happy, sad, relaxed, or angry, nothing else.\
+                    It should only be happy, sad, relaxed, or angry, nothing else ensuring THE RESPONSE IS IN LOWERCASE\
                 """
             },
             {

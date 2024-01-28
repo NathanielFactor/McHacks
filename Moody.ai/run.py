@@ -8,6 +8,10 @@ import datetime
 import numpy as np
 import pickle
 import htmloperations as htop
+import bot2
+import random
+import pandas
+import csv
 
 app = Flask(__name__)
 app.secret_key = "super-secret-key"
@@ -47,14 +51,17 @@ def get_mood_by_date(date):
 
 @app.route('/')
 def index():
-    return render_template('index.html',
-                           token = TOKEN_INFO
-                           )
+    return render_template('index.html')
 
 @app.route('/calendar')
 def calendar():
+    try:
+        token_info = get_token()
+    except:
+        print("User not logged in")
+        return redirect(url_for('login'))
     return render_template('calendar.html',
-                           token = TOKEN_INFO
+                           
                            )
 @app.route('/submit', methods=['POST'])
 def submit_entry():
@@ -73,7 +80,8 @@ def get_message():
         token_info = get_token()
     except:
         print("User not logged in")
-        return redirect('/callback')
+        data = {'message': 'login'}
+        return jsonify(data)
     date = request.args.get('date')
     message = get_message_by_date(date)
     print(message)
@@ -92,22 +100,54 @@ def journal():
         token_info = get_token()
     except:
         print("User not logged in")
-        return redirect('/callback')
+        return redirect(url_for('login'))
     return render_template('journal.html',
                            
                            )
 
-@app.route('/playlist')
 
+
+@app.route('/playlist')
 def playlist():
     try:
         token_info = get_token()
     except:
         print("User not logged in")
-        return redirect('/callback')
-    return render_template('playlist.html',
+        return redirect(url_for('login'))
+    
+    sp = spotipy.Spotify(auth=session.get(TOKEN_INFO)['access_token'])
+    user_id = sp.current_user()['id']
+    print(user_id)
+
+    id = request.args.get('id')
+
+    return render_template('playlist.html', id=id)
+
+@app.route('/genPlaylist', methods=['GET'])
+def genPlaylist():
+    try:
+        token_info = get_token()
+    except:
+        print("User not logged in")
+        return redirect(url_for('login'))
+    
+    sp = spotipy.Spotify(auth=session.get(TOKEN_INFO)['access_token'])
+    user_id = sp.current_user()['id']
+    print(user_id)
+
+    date = request.args.get('date')
+    mood = get_mood_by_date(date)
+
+    trackURIs, tracks = getTracks(mood, sp)
+    features = getAudioFeatures(sp, trackURIs)
+
+    model = pickle.load(open("model.sav", 'rb'))
+    
+
+    id = createPlaylist(sp, user_id, trackURIs, features, mood, date, model)
+
+    return redirect(url_for('playlist', id=id))
                            
-                           )
 
 @app.route('/login')
 def login():
@@ -118,13 +158,8 @@ def login():
 def authenticate():
     print('hello')
     auth_url = create_spotify_oauth().get_authorize_url()
-    
     print(TOKEN_INFO)
-
     print(auth_url)
-
-    time.sleep(2)
-
     return redirect(auth_url)
 
 @app.route('/callback')
@@ -142,38 +177,10 @@ def callback():
 
     print(session[TOKEN_INFO])
 
-    return redirect(url_for('generatePlaylist'))
-
-@app.route('/generatePlaylist')
-def generatePlaylist():
-    try:
-        token_info = get_token()
-    except:
-        print("User not logged in")
-        return redirect('/callback')
-    
-    sp = spotipy.Spotify(auth=session.get(TOKEN_INFO)['access_token'])
-    user_id = sp.current_user()['id']
-    print(user_id)
-
-    trackURIs, tracks = getTracks("sad", sp)
-    features = getAudioFeatures(sp, trackURIs)
-
-    model = pickle.load(open("model.sav", 'rb'))
-
-    createPlaylist(sp, user_id, trackURIs, features, "sad", model)
-
-
-
-    return("success")
+    return redirect(url_for('index'))
 
 
 def getTracks(mood, sp):
-    try:
-        token_info = get_token()
-    except:
-        print("User not logged in")
-        return redirect('/callback')
     
     results = []
     trackURIs = []
@@ -225,24 +232,47 @@ def getAudioFeatures(sp, trackURIs):
             features = []
     return featuresTotal
 
-def createPlaylist(sp, userID, trackURIs, features, mood, model):
-	featuresArray = np.asarray(features, dtype=np.float32)
-	predictions = model.predict(featuresArray)
-	songs = []
-	playlistSongs = []
+def load_csv_and_select_uris_random(csv_file, mood, num_entries):
+    dataset = pandas.read_csv("spotifyIds.csv")
+    dataset = pandas.Series.tolist(dataset)
+    all_entries = []
+    for elem in dataset:
+        res = elem[0].strip('][').replace("'", "").split(', ')
+        if res[1] == mood:
+            all_entries.append(res[0])
 
-	#get all songs that match user's current mood and adds
-	#up to 30 of them to playlist
-	for i in range(len(predictions)):
-		if (predictions[i] == mood):
-			playlistSongs.append(trackURIs[i])
-		if (len(playlistSongs) >= 30):
-			break
-	#create new playlist for user
-	playlist = sp.user_playlist_create(userID,name=mood,public=True)
-	playlistID = playlist['id']
-	#add songs to playlist
-	sp.user_playlist_add_tracks(userID, playlistID, playlistSongs)
+
+    # Shuffle the list of URIs to randomize the selection
+    random.shuffle(all_entries)
+
+    return all_entries[:num_entries]
+
+def createPlaylist(sp, userID, trackURIs, features, mood, date, model):
+    featuresArray = np.asarray(features, dtype=np.float32)
+    predictions = model.predict(featuresArray)
+    songs = []
+    playlistSongs = []
+    #get all songs that match user's current mood and adds
+    #up to 30 of them to playlist
+    for i in range(len(predictions)):
+        if (predictions[i] == mood):
+            playlistSongs.append(trackURIs[i])
+    
+    if playlistSongs != []:
+        # Shuffle the playlistSongs list to randomize the added tracks
+        random.shuffle(playlistSongs)
+        
+        # Add up to 30 matching tracks to the playlist
+        playlistSongs = playlistSongs[:30]
+    else:
+        playlistSongs = load_csv_and_select_uris_random('spotifyIds.csv', mood, 20)
+        print(playlistSongs)
+
+    print(playlistSongs)
+    playlist = sp.user_playlist_create(userID,name="Your Mood "+date, public=True)
+    playlistID = playlist['id']
+    sp.user_playlist_add_tracks(userID, playlistID, playlistSongs) 
+    return playlistID
 
 def get_token():
     token_info = session.get(TOKEN_INFO, None)
@@ -262,10 +292,11 @@ def create_spotify_oauth():
     )
     
 @app.route('/api/generate-quote', methods=['POST'])
-def generate_quote(mood):
-
+def generate_quote():
+    # Get the message from the POST request.
+    mood = request.args.get('prompt')    
     # Use your OpenAI integration to generate a response based on the prompt
-    generated_response = bot2.ai_response2(mood)
+    generated_response = bot2.ai_response(mood)
 
     return jsonify({'quote': generated_response})
 

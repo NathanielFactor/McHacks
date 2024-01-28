@@ -9,7 +9,7 @@ def ai_response(message):
         messages=[
             {
                 "role": "system",
-                "content": """Given a specific emotion, write a quote that inspires the user to keep pushing through their day."""
+                "content": """Given a specific emotion, write a 5 word quote that inspires the user to keep pushing through their day."""
             },
             {
                 "role": "user",
@@ -17,7 +17,7 @@ def ai_response(message):
             }
         ],
         temperature = 1,
-        max_tokens = 500,
+        max_tokens = 100,
         top_p = 1,
         frequency_penalty = 1,
         presence_penalty = 1

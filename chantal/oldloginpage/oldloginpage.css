@@ -1,0 +1,123 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Poppins', sans-serif;             /*font-family: 'Poppins', sans-serif; */
+}
+
+body{
+    display:flex;
+    justify-content: center;                        /*center the content horizontally */
+    align-items: center;                            /*center the content vertically*/
+    min-height:100vh;
+    /*background:#173F5F;*/
+    background: url('https://media.tenor.com/w1OUcTo6vIIAAAAd/night-wallpaper.gif') center/cover no-repeat fixed;
+
+}
+
+.wrapper{
+    width:420px;
+    background: #20639b;                          /*inner textbox background colour, feel free to change TO SPOTIFY THEME*/  
+    color:#fff;                                   /*text colour:login, remember me, dont have an account, logo colours*/
+    border-radius:10px;
+    padding:30px 40px
+}
+
+.wrapper h1{
+    font-size: 30px;                                /*header font size*/ 
+    text-align: center;                             /*header text alignment*/
+    margin-top:20px;
+}
+
+.wrapper .input-box{
+    width:100%;
+    height:50px;                                    /*vertical distance of the input boxes*/
+    /*background:silver;                            /*colour of the box behind the username and password boxes*/   
+    margin:30px 0;                                  /*vertical and horizontal distance between the username and password boxes*/
+}
+
+.wrapper .input-box input{
+    width:100%;
+    height:100%;
+    outline:none;
+    border:none;
+    font-size:20px;                                 /*font size of the username and password*/
+    padding:15px 45px 15px 15px;                    /*distances between the username and password boxe edges and the text*/
+    background:transparent;
+    border:2px solid #fff;                        /*colour of the username and password round boxes*/
+    border-radius:40px;                             /*roundness of the username and password boxes*/
+    color:#fff;                                   /*colour of the username and password text*/        
+}
+
+.input-box i{
+    position:absolute;
+    right: 600px; 
+    /*top:                                           /* nvm i got it I NEED HELP WITH THIS HOW DO I PUSH IT DOWN A BIT horizontal distance between the username and password icons and the text*/
+    margin-top:25px;
+    transform:translateY(-50%);
+    font-size:20px;
+}
+
+.wrapper .remember-forgot{
+    display:flex;
+    justify-content:space-between;
+    font-size:14px;                                   /*font size of the remember me and forgot password text*/
+    margin:-15px 0 15px;
+}
+
+.remember-forgot label input{
+    accent-color:#fff;
+    margin-right:3px;
+}
+
+.remember-forgot a{
+    color:#fff;
+    text-decoration:none;                               /*removed underline of the forgot password text*/
+}
+
+.remember-forgot a:hover{
+    text-decoration:underline;                          /*underline of the forgot password text when you hover on it*/
+}
+
+.wrapper .btn{
+    width:100%;
+    height:45px;
+    border:none;
+    outline:none;
+    font-size:20px;                                     /*font size of the login button*/
+    background:#fff;                                /*colour of the login button*/
+    color:#fff;                                     /*colour of the login button text*/
+    border-radius:40px;                             /*roundness of the login button*/
+    cursor:pointer;
+    font-size:16px;
+    color:#333;
+    box-shadow:0 0 10px rgba(0,0,0,.1);
+    cursor:pointer;
+    font-weight:600;
+    margin-top:1px;                        /*vertical distance between the login button and the remember me and forgot password text*/  
+}
+
+.wrapper .register-link{
+    font-size:12px;                         /*font size of the dont have an account text*/
+    text-align:center;
+    margin-top:20px;                        /*vertical distance between the dont have an account text and the login button*/
+
+}
+
+.register-link p a{
+    color:#fff;
+    text-decoration:none;                   /*removed underline of the register text*/
+    font-weight:600;
+}
+
+.register-link p a:hover{                   /*underline of the dont have an account text when you hover on it*/
+    text-decoration:underline;
+}
+
+
+
+
+
+

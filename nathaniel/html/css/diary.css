@@ -54,8 +54,6 @@ body{
     border:none;
     border-bottom: 1px solid black;
     font-size:20px;
-    font-family:cursive;
-
 }
 .line:disabled{
     color:black;
@@ -85,14 +83,12 @@ body{
     max-width:100px;
     padding:10px 15px;
     border:none;
-    margin-top:20px;
+    margin-top:25px;
     font-size:13px;
     font-family:cursive;
     background-color: #0288d1;                                /*button colour             either just colour "green" if yellow background or #0288d1 for blue background*/
     color:white;                                            /*"Save entry colour"*/
     border-radius:200px;
-    margin-left:auto;
-    margin-right:auto;
 }
 
 .btn:hover{
@@ -109,19 +105,18 @@ body{
 
 .submit{
     max-width:100px;
+    width:350px;
     padding:10px 15px;
     border:none;
-    margin-top:20px;
+    margin-top:25px;
     font-size:13px;
     font-family:cursive;
     background-color: #0288d1;                                /*button colour             either just colour "green" if yellow background or #0288d1 for blue background*/
     color:white;                                            /*"Save entry colour"*/
     border-radius:200px;
-    margin-left:auto;
-    margin-right:auto;
-    
-
-
+    position:absolute;
+    margin-left:150px;
+    margin-top:690px;
     
 }
 

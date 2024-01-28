@@ -25,20 +25,34 @@
             // Load content dynamically based on the clicked link
             var container = document.getElementById("content-container");
             var url = contentType + ".html";
-
+        
             // Use fetch to load the content from the file
             fetch(url)
-                .then(response => response.text())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Failed to load content: ${response.statusText}`);
+                    }
+                    return response.text();
+                })
                 .then(data => {
                     container.innerHTML = data;
+        
+                    // Execute scripts in the loaded content
+                    var scripts = container.getElementsByTagName("script");
+                    for (var i = 0; i < scripts.length; i++) {
+                        try {
+                            eval(scripts[i].innerText);
+                        } catch (error) {
+                            console.error(`Error executing script: ${error.message}`);
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error(`Error loading content: ${error.message}`);
                 });
-        }
-
-        // Update login text when the page loads
-        window.onload = function() {
-            updateLoginText();
-        };
+        } 
     </script>
+    
 </head>
 
 <body>
@@ -50,7 +64,7 @@
             <nav>
                 <ul>
                     <li><a href="#" onclick="loadContent('calendar')">Calendar</a></li>
-                    <li><a href="#" onclick="loadContent('journal')">Journal</a></li>
+                    <li><a href="#" onclick="loadContent('diary')">Diary</a></li>
                     <li><a href="#" onclick="loadContent('playlist')">Playlist</a></li>
                     <li><a id="login-link" href="#" onclick="loadContent('login')">Login</a></li>
                 </ul>

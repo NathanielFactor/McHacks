@@ -63,7 +63,7 @@ def calendar():
     return render_template('calendar.html',
                            
                            )
-@app.route('/submit', methods=['POST'])
+@app.route('/submit', methods=['GET'])
 def submit_entry():
     data = request.json
     date = data.get('date')

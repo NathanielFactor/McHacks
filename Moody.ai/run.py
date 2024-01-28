@@ -120,8 +120,10 @@ def playlist():
     print(user_id)
 
     id = request.args.get('id')
+    date= request.args.get('date')
+    quote = bot2.ai_response(get_mood_by_date(date))
 
-    return render_template('playlist.html', id=id)
+    return render_template('playlist.html', id=id, quote=quote)
 
 @app.route('/genPlaylist', methods=['GET'])
 def genPlaylist():
@@ -146,7 +148,7 @@ def genPlaylist():
 
     id = createPlaylist(sp, user_id, trackURIs, features, mood, date, model)
 
-    return redirect(url_for('playlist', id=id))
+    return redirect(url_for('playlist', id=id, date=date))
                            
 
 @app.route('/login')
@@ -291,14 +293,6 @@ def create_spotify_oauth():
         scope="user-library-read playlist-modify-public playlist-modify-private user-read-recently-played user-top-read"
     )
     
-@app.route('/api/generate-quote', methods=['POST'])
-def generate_quote():
-    # Get the message from the POST request.
-    mood = request.args.get('prompt')    
-    # Use your OpenAI integration to generate a response based on the prompt
-    generated_response = bot2.ai_response(mood)
-
-    return jsonify({'quote': generated_response})
 
 
 AUTH_URL = "https://accounts.spotify.com/authorize"

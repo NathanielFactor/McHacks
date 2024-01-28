@@ -6,38 +6,8 @@
     <title>Navbar</title>
     <script>
         // Dummy function to simulate user authentication status
-        function isLoggedIn() {
-            // Replace this with your actual authentication check logic
-            return false;  // Change to true if the user is logged in
-        }
 
-        function updateLoginText() {
-            var loginLink = document.getElementById("login-link");
 
-            if (isLoggedIn()) {
-                loginLink.textContent = "Account";
-            } else {
-                loginLink.textContent = "Login";
-            }
-        }
-
-        function loadContent(contentType) {
-            // Load content dynamically based on the clicked link
-            var container = document.getElementById("content-container");
-            var url = contentType + ".html";
-
-            // Use fetch to load the content from the file
-            fetch(url)
-                .then(response => response.text())
-                .then(data => {
-                    container.innerHTML = data;
-                });
-        }
-
-        // Update login text when the page loads
-        window.onload = function() {
-            updateLoginText();
-        };
     </script>
 </head>
 
@@ -141,7 +111,7 @@
     <iframe id="spotifyIframe" style="border-radius:12px; margin-left:150px;" src="https://open.spotify.com/embed/playlist/2toDBwzIhzyvBxnCvoTXIY?utm_source=generator"width="30%" height=800vh frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
     <div class="quote-wrap">
         <h2>Quote of the Day</h2>
-        <p id="quoteText">Loading quote...</p>
+        <p id="quoteText">{{ quote }}</p>
     </div>
 
     <script>
@@ -149,34 +119,12 @@
         console.log(idFromFlask)
         const spotifyIframe = document.getElementById('spotifyIframe');
         spotifyIframe.src = `https://open.spotify.com/embed/playlist/${idFromFlask}?utm_source=generatortheme=white&view=coverart`;
-        setTimeout(function() {
-            spotifyIframe.contentWindow.location.reload();
-        }, 100);
-        const quoteText = document.getElementById("quoteText");
-
-        // Function to fetch the generated quote from the backend
-        async function fetchGeneratedQuote() {
-            try {
-                // Make a POST request to your backend endpoint
-                const response = await fetch('/api/generate-quote', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ prompt: 'Your prompt here' }),
-                });
-
-                const data = await response.json();
-
-                // Update the <p> tag with the generated quote
-                quoteText.innerText = data.quote;
-            } catch (error) {
-                console.error('Error fetching quote:', error);
-            }
+        reload = true
+        while (reload){
+            window.location.reload()
+            window.stop()
+            reload = false
         }
-
-        // Call the function to fetch and display the generated quote
-        fetchGeneratedQuote();
     </script>
 </body>
 

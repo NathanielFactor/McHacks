@@ -77,7 +77,6 @@ nav a:hover::before{
     width: 100%;
 }
 .happy{
-    background-image: url('https://media.tenor.com/PpoGYRtmLFoAAAAj/smile-happy.gif');
     background-size:cover;
     background-position:center;
     height:650px;
@@ -105,7 +104,7 @@ nav a:hover::before{
     text-align: center;
     position: fixed;
     border:none;
-    background:linear-gradient(#FADA5E,#FAC700);
+    background:linear-gradient(lightblue,rgb(56, 56, 225));
     border-radius:100px;
     padding:25px 25px 30px;
 }

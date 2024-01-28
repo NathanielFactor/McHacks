@@ -38,12 +38,11 @@ function generateCalendar() {
                 td.textContent = dayCounter;
 
                 td.style.backgroundColor = colorArray[dayCounter - 1]; //set background colour using colorArrray
-
-
+                
                 td.addEventListener('click', function () {
-                    // Replace the URL with the actual page you want to navigate to
-                    window.location.href = 'page-for-day-' + dayCounter + '.html';
+                    openModal(dayCounter);
                 });
+
                 dayCounter++;
             }
             row.appendChild(td);
@@ -52,6 +51,19 @@ function generateCalendar() {
     }
     handleButtonClick();
 }
+
+function openModal(selectedDay) {
+    const modal = document.getElementById('myModal');
+    const selectedDayText = document.getElementById('selectedDayText');
+    selectedDayText.textContent = "stuff";
+    modal.style.display = 'flex';
+}
+
+function closeModal() {
+    const modal = document.getElementById('myModal');
+    modal.style.display = 'none';
+}
+
 
 //input color is a string 
 function changeCellColor(color, dayOfMonth) {

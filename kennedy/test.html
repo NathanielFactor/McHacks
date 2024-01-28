@@ -6,7 +6,7 @@
     <title>Month View</title>
     <style>
         body {
-            font-family: 'Times New Roman', sans-serif;
+            font-family:sans-serif;
             text-align: center;
         }
 
@@ -33,8 +33,57 @@
         }
 
         td:hover {
-            background-color: #ebe2ede2;
+            background-color: #95ade7ce;
         }
+
+        /* Modal Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(49, 42, 65, 0.453);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-header {
+            padding: 10px;
+            background-color: #8495cde5;
+            border-bottom: 1px solid hsl(243, 46%, 47%);
+        }
+
+        .modal-content {
+            background-color: #8495cde5;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0.2, 0.1);
+            text-align: center;
+            max-width: 80%;
+            margin: 0 auto;
+            max-height: 80%;
+            overflow: auto;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        /* Sticky Note Styling */
+        .sticky-note {
+            background-color: #ffeb3b;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
     </style>
 </head>
 <body>
@@ -42,6 +91,20 @@
     <h2> Moods This Month </h2>
 
 <p id="currentMonth"></p>
+
+<!-- Modal -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Your mood on this day: </h2>
+        </div>
+        <div class="modal-body">
+            <p id="selectedDayText"></p>
+            <!-- Add your modal content here -->
+        </div>
+    </div>
+</div>
 
 <script>
     // Get the current date
@@ -61,6 +124,8 @@
     const currentMonthElement = document.getElementById('currentMonth');
     currentMonthElement.textContent =  monthNames[currentMonth];
 </script>
+
+
 
 <div id="calendar-container"></div>
 

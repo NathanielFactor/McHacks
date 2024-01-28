@@ -12,7 +12,7 @@ body{
 }
 
 header {
-    background: #3f4643;
+    background: #383535;
 }
 header::after{
     content: '';
@@ -73,4 +73,18 @@ nav a::before{
 
 nav a:hover::before{
     width: 100%;
+}
+.img{
+    background-image: url('https://www.google.com/url?sa=i&url=https%3A%2F%2Fgifdb.com%2Fgif%2Faesthetic-anime-pixelated-background-bnuuk8wf00lrrcvf.html&psig=AOvVaw0a6UCIpUB4H7PpQ1ucs0Dq&ust=1706528515129000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCMDCtKKAgIQDFQAAAAAdAAAAABAD');
+    background-size:cover;
+    background-position:center;
+    height:300px;
+    width:300px;
+    border-radius:50%;
+    overflow: hidden;
+}
+.img img {
+    width: 100%; /* Make the image fill the entire container */
+    height: 100%; /* Make the image fill the entire container */
+    object-fit: cover; 
 }

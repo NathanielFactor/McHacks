@@ -12,7 +12,9 @@ body{
     justify-content: center;                        /*center the content horizontally */
     align-items: center;                            /*center the content vertically*/
     min-height:100vh;
-    background: #173f5f;                          /*background colour, feel free to change TO SPOTIFY THEME*/
+    /*background:#173F5F;*/
+    background: url('https://media.tenor.com/w1OUcTo6vIIAAAAd/night-wallpaper.gif') center/cover no-repeat fixed;
+
 }
 
 .wrapper{
@@ -24,9 +26,9 @@ body{
 }
 
 .wrapper h1{
-    font-size: 36px;                                /*login font size*/ 
-    text-align: center;                             /*login text alignment*/
-    margin-top:20px;
+    font-size: 30px;                                /*header font size*/ 
+    text-align: center;                             /*header text alignment*/
+    
 }
 
 .wrapper .input-box{
@@ -51,7 +53,7 @@ body{
 
 .input-box i{
     position:absolute;
-    right:220px; 
+    right: 600px; 
     /*top:                                           /* nvm i got it I NEED HELP WITH THIS HOW DO I PUSH IT DOWN A BIT horizontal distance between the username and password icons and the text*/
     margin-top:25px;
     transform:translateY(-50%);
@@ -94,7 +96,7 @@ body{
     box-shadow:0 0 10px rgba(0,0,0,.1);
     cursor:pointer;
     font-weight:600;
-    margin-top:1px;                        /*vertical distance between the login button and the remember me and forgot password text*/  
+    margin-top:20px;                        /*vertical distance between the login button and the remember me and forgot password text*/  
 }
 
 .wrapper .register-link{

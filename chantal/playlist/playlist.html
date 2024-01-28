@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playlist</title>
+
+    <style>
+        body{
+            margin: 0; 
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Lobster', cursive;
+            background: url(https://i.redd.it/akfqd7mvcss51.jpg) center/cover no-repeat fixed;
+        }
+
+        .quote-wrap {
+            width:450px;
+            top: 45%;
+            right: 15%;
+            transform: translate(0, -50%);
+            color: white;
+            font-size: 30px;
+            font-family: 'Lobster', cursive;
+            text-align: center;
+            position: fixed;
+            border:none;
+            background:linear-gradient(#8c5950,#3e2723);
+            border-radius:100px;
+            padding:25px 25px 30px;
+        }
+        .quote-wrap textarea{
+            width: 75%;
+            padding:15px;
+            border-radius:20px;
+            outline: none;
+            resize: none;
+            font-size: 20px;
+            color: white;
+            background-color: #3e2723;
+            border-color: #3e2723;
+            font-family: 'Lobster', cursive;
+            text-align: center;
+            font-weight: bold;
+        }
+        textarea:is(:focus,:valid){
+            border:none;
+            padding:14px;
+        }
+        textarea::-webkit-scrollbar{
+            width:0px;
+
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <iframe style="border-radius:12px; margin-left:150px;" src="https://open.spotify.com/embed/playlist/2toDBwzIhzyvBxnCvoTXIY?utm_source=generator"width="30%" height=800vh frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    <div class="quote-wrap">
+        <h2>Quote of the Day</h2>
+        <textarea placeholder="Type something here..." required></textarea>
+    </div>
+
+    <script>
+      const textarea=document.querySelector("textarea");
+      textarea.addEventListener("keyup",e=>{
+        let scHeight=e.target.scrollHeight;
+        textarea.style.height='auto';
+        textarea.style.height='${scHeight}px';
+      });
+    </script>
+    
+</body>
+
+</html>
+

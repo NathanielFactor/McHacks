@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="{{url_for('static', filename='css/nav.css')}}" rel="stylesheet" type="text/css">
+    <meta charset="UTF-8">
+    <title>Navbar</title>
+    <script>
+        // Dummy function to simulate user authentication status
+        function isLoggedIn() {
+            // Replace this with your actual authentication check logic
+            return false;  // Change to true if the user is logged in
+        }
+
+        function updateLoginText() {
+            var loginLink = document.getElementById("login-link");
+
+            if (isLoggedIn()) {
+                loginLink.textContent = "Account";
+            } else {
+                loginLink.textContent = "Login";
+            }
+        }
+
+        function loadContent(contentType) {
+            // Load content dynamically based on the clicked link
+            var container = document.getElementById("content-container");
+            var url = contentType + ".html";
+
+            // Use fetch to load the content from the file
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    container.innerHTML = data;
+                });
+        }
+
+        // Update login text when the page loads
+        window.onload = function() {
+            updateLoginText();
+        };
+    </script>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <a href="{{url_for('index')}}">
+                <img src="{{url_for('static', filename='images/236-2362818_anime-sempai-animegirl-heart-kawaii-cute-anime-girl.png')}}" alt="logo" class="logo">
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="{{url_for('calendar')}}" onclick="">Calendar</a></li>
+                    <li><a href="{{url_for('journal')}}">Journal</a></li>
+                    <li><a href="{{url_for('playlist')}}">Playlist</a></li>
+                    <li><a href="{{url_for('login')}}" >Login</a></li>
+                </ul>
+            </nav>
+        </div>
+        
+    </header>
+
+    <!-- Container to load content dynamically -->
+    <div id="content-container">
+        
+    </div>
+    <br><br><br><br><br><br><br><br><br><br><br><br>
+    <center>
+    <div class="wrapper">
+        <form action="">
+            <h1>Diary in, playlist out</h1>                                              <!--title on top of the login box-->
+
+            <button type="submit" class="btn">Log in with Spotify</button>
+
+        </form>
+    </div>
+    </center>
+</body>
+</html>
+<link rel="stylesheet" href="{{url_for('static', filename='css/loginpage.css')}}">
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>

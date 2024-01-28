@@ -1,0 +1,54 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Poppins', sans-serif;             /*font-family: 'Poppins', sans-serif; */
+}
+
+body{
+
+    /*background:#173F5F;*/
+    background: url('https://media.tenor.com/w1OUcTo6vIIAAAAd/night-wallpaper.gif') center/cover no-repeat fixed;
+
+}
+
+.wrapper{
+    width:420px;
+    background: #20639b;                          /*inner textbox background colour, feel free to change TO SPOTIFY THEME*/  
+    color:#fff;
+    display:flex;                                   /*text colour:login, remember me, dont have an account, logo colours*/
+    border-radius:10px;
+    padding:30px 40px
+}
+
+.wrapper h1{
+    font-size: 30px;                                /*header font size*/ 
+    text-align: center;                             /*header text alignment*/
+    
+}
+
+.wrapper .btn{
+    width:100%;
+    height:45px;
+    border:none;
+    outline:none;
+    font-size:20px;                                     /*font size of the login button*/
+    background:#fff;                                /*colour of the login button*/
+    color:#fff;                                     /*colour of the login button text*/
+    border-radius:40px;                             /*roundness of the login button*/
+    cursor:pointer;
+    font-size:16px;
+    color:#333;
+    box-shadow:0 0 10px rgba(0,0,0,.1);
+    cursor:pointer;
+    font-weight:600;
+    margin-top:20px;                        /*vertical distance between the login button and the remember me and forgot password text*/  
+}
+
+
+
+
+
+

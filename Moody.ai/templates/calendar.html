@@ -1,0 +1,325 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="{{url_for('static', filename='css/nav.css')}}" rel="stylesheet" type="text/css">
+    <meta charset="UTF-8">
+    <title>Navbar</title>
+    <script>
+        // Dummy function to simulate user authentication status
+        function isLoggedIn() {
+            // Replace this with your actual authentication check logic
+            return false;  // Change to true if the user is logged in
+        }
+
+        function updateLoginText() {
+            var loginLink = document.getElementById("login-link");
+
+            if (isLoggedIn()) {
+                loginLink.textContent = "Account";
+            } else {
+                loginLink.textContent = "Login";
+            }
+        }
+
+        function loadContent(contentType) {
+            // Load content dynamically based on the clicked link
+            var container = document.getElementById("content-container");
+            var url = contentType + ".html";
+
+            // Use fetch to load the content from the file
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    container.innerHTML = data;
+                });
+        }
+
+        // Update login text when the page loads
+        window.onload = function() {
+            updateLoginText();
+        };
+    </script>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <a href="{{url_for('index')}}">
+                <img src="{{url_for('static', filename='images/236-2362818_anime-sempai-animegirl-heart-kawaii-cute-anime-girl.png')}}" alt="logo" class="logo">
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="{{url_for('calendar')}}" onclick="">Calendar</a></li>
+                    <li><a href="{{url_for('journal')}}">Journal</a></li>
+                    <li><a href="{{url_for('playlist')}}">Playlist</a></li>
+                    <li><a href="{{url_for('login')}}" >Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Container to load content dynamically -->
+    <div id="content-container"></div>
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Month View</title>
+    <style>
+        body {
+            font-family:sans-serif;
+            text-align: center;
+            background: url(https://i.pinimg.com/originals/df/28/76/df2876e38bbff18a1528cbdf58238dc5.gif) center/cover no-repeat fixed;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #8e9af3;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer; 
+            transition: background-color 0.3s;
+        }
+
+        th {
+            background-color: #4a57e3df;
+        }
+
+        td {
+    
+            transition: background-color 0.3s;
+        }
+
+        /* Set the background color directly for each cell */
+        td.color1 { background-color: #ff9999; }
+        td.color2 { background-color: #ffcc99; }
+        td.color3 { background-color: #ffdb58; }
+        td.color4 { background-color: #a2cffe; }
+        td.color5 { background-color: #99ff99; }
+        td.color6 { background-color: #ffcccb; }
+        td.color7 { background-color: #c2f0c2; }
+        td.color8 { background-color: #ffb3b3; }
+        td.color9 { background-color: #99c2ff; }
+        td.color10 { background-color: #ffcc99; }
+        td.color11 { background-color: #c2f0c2; }
+        td.color12 { background-color: #ffdb58; }
+
+        td:hover {
+            background-color: #95ade7ce;
+        }
+
+        /* Modal Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(49, 42, 65, 0.453);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-header {
+            padding: 10px;
+            background-color: #8495cde5;
+            border-bottom: 1px solid hsl(243, 46%, 47%);
+        }
+
+        .modal-content {
+            background-color: #8495cde5;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0.2, 0.1);
+            text-align: center;
+            max-width: 80%;
+            margin: 0 auto;
+            max-height: 80%;
+            overflow: auto;
+        }
+
+        
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h2> Moods This Month </h2>
+
+<p id="currentMonth"></p>
+
+<!-- Modal -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Your mood on this day: </h2>
+        </div>
+        <div class="modal-body">
+            <p id="selectedDayText"></p>
+            <!-- Add your modal content here -->
+        </div>
+    </div>
+</div>
+
+<script>
+    // Get the current date
+    const currentDate = new Date();
+
+    // Get the month (returns a number from 0 to 11, where 0 is January and 11 is December)
+    const currentMonth = currentDate.getMonth();
+
+    // Array of month names
+    const monthNames = [
+        'January', 'February', 'March', 'April',
+        'May', 'June', 'July', 'August',
+        'September', 'October', 'November', 'December'
+    ];
+
+    // Display the current month in an HTML element
+    const currentMonthElement = document.getElementById('currentMonth');
+    currentMonthElement.textContent =  monthNames[currentMonth];
+</script>
+
+
+
+<div id="calendar-container"></div>
+
+<script src= "js/calender.js" defer></script> <!--links javascript file to the html file-->
+
+<button id="calendarButton" onclick="generateCalendar()">Generate Calendar</button>
+
+<script>
+function generateCalendar() {
+
+    const container = document.getElementById('calendar-container');
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = currentDate.getMonth();
+    
+    const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
+    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+    
+    const colorArray = [daysInMonth];  // set cell colors to white 
+            
+    const table = document.createElement('table');
+    container.appendChild(table);
+    
+    const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const headerRow = document.createElement('tr');
+    daysOfWeek.forEach(day => {
+        const th = document.createElement('th');
+        th.textContent = day;
+        headerRow.appendChild(th);
+    });
+    table.appendChild(headerRow);
+    
+    let dayCounter = 1;
+    for (let i = 0; i < 6; i++) {
+        const row = document.createElement('tr');
+        for (let j = 0; j < 7; j++) {
+            const td = document.createElement('td');
+            if (i === 0 && j < firstDayOfMonth.getDay()) {
+                td.textContent = '';
+            } else if (dayCounter <= daysInMonth) {
+                td.textContent = dayCounter;
+
+                td.style.backgroundColor = colorArray[dayCounter - 1]; //set background colour using colorArrray
+                td.className = 'color' + dayCounter;
+                td.addEventListener('click', function () {
+                    openModal(dayCounter);
+                });
+                dayCounter++;
+            }
+            row.appendChild(td);
+        }
+        table.appendChild(row);
+        }
+    handleButtonClick();
+}
+    
+    function openModal(selectedDay) {
+        const modal = document.getElementById('myModal');
+        const selectedDayText = document.getElementById('selectedDayText');
+        selectedDayText.textContent = "stuff";
+        modal.style.display = 'flex';
+    }
+    
+    function closeModal() {
+        const modal = document.getElementById('myModal');
+        modal.style.display = 'none';
+    }
+    
+    
+    //input color is a string 
+    function changeCellColor(color, dayOfMonth) {
+    
+        if (color == yellow) {
+            colorCode = '#f6ff76'
+        }
+        if (color == blue) {
+            colorCode = '#7698ff'
+        }
+        if (color == red) {
+            colorCode = '#ea354d'
+        }
+        colorArray[dayOfMonth - 1] = colorCode;
+    
+        enableButtonClick();
+    }
+    
+    
+    function handleButtonClick() {
+        document.getElementById("calendarButton").disabled = true;
+    
+       
+    }
+    
+    function enableButtonClick() {
+        document.getElementById("calendarButton").disabled = false;
+        
+    } 
+    
+    
+//input color is a string 
+function changeCellColor(color, dayOfMonth) {
+
+    if (color == yellow) {
+        colorCode = '#f6ff76'
+    }
+    if (color == blue) {
+        colorCode = '#7698ff'
+    }
+    if (color == red) {
+        colorCode = '#ea354d'
+    }
+    colorArray[dayOfMonth - 1] = colorCode;
+
+    generateCalendar(); //update cell color
+}
+</script>
+
+
+</body>
+</html>
+

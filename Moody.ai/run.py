@@ -7,25 +7,78 @@ import sklearn
 import numpy as np
 import pickle
 
-
 app = Flask(__name__)
 app.secret_key = "super-secret-key"
 app.config['SESSION_COOKIE_NAME'] = 'spotify-login-session'
 TOKEN_INFO = 'token_info'
 CLIENT_ID = "e454cfe7332648138c6cd894bede3ea9"
 CLIENT_SECRET = "dfb2a085a05e4a71bfa60d263a5e4d45"
+USER_ID = "Nathaniel Factor"
 
+
+JournalEntries = []
 
 @app.route('/')
+def index():
+    return render_template('index.html',
+                           token = TOKEN_INFO,
+                           journalEntries = JournalEntries,
+                           )
+
+@app.route('/calendar')
+def calendar():
+    return render_template('calendar.html',
+                           token = TOKEN_INFO,
+                           journalEntries = JournalEntries,
+                           )
+
+@app.route('/journal')
+def journal():
+    return render_template('journal.html',
+                           token = TOKEN_INFO,
+                           journalEntries = JournalEntries,)
+
+@app.route('/playlist')
+def playlist():
+    return render_template('playlist.html',
+                           token = TOKEN_INFO,
+                           journalEntries = JournalEntries,)
+
+@app.route('/login')
 def login():
+     return render_template('login.html',
+                            token = TOKEN_INFO,
+                           journalEntries = JournalEntries,)
+
+
+@app.route('/auth')
+def authenticate():
+    print('hello')
     auth_url = create_spotify_oauth().get_authorize_url()
+    
+    print(TOKEN_INFO)
+
+    print(auth_url)
+
+    time.sleep(2)
+
     return redirect(auth_url)
 
 @app.route('/callback')
 def callback():
-    code = request.args.get('code')
+
+    print(request.values)
+
+    print("THIS IS THE CODE")
+    code = request.values.get('code')
+    print(code)
+
+    print("THIS IS THE END OF THE CODE")
     token_info = create_spotify_oauth().get_access_token(code)
     session[TOKEN_INFO] = token_info
+
+    print(session[TOKEN_INFO])
+
     return redirect(url_for('generatePlaylist'))
 
 @app.route('/generatePlaylist')
@@ -38,6 +91,7 @@ def generatePlaylist():
     
     sp = spotipy.Spotify(auth=session.get(TOKEN_INFO)['access_token'])
     user_id = sp.current_user()['id']
+    print(user_id)
 
     trackURIs, tracks = getTracks("sad", sp)
     features = getAudioFeatures(sp, trackURIs)
@@ -45,6 +99,7 @@ def generatePlaylist():
     model = pickle.load(open("model.sav", 'rb'))
 
     createPlaylist(sp, user_id, trackURIs, features, "sad", model)
+
 
 
     return("success")

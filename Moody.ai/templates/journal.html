@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="{{url_for('static', filename='css/nav.css')}}" rel="stylesheet" type="text/css">
+
+    <link href="{{url_for('static', filename='css/diary.css')}}" rel="stylesheet" type="text/css">
+    <meta charset="UTF-8">
+    <title>Navbar</title>
+    <script>
+    </script>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <a href="{{url_for('index')}}">
+                <img src="{{url_for('static', filename='images/236-2362818_anime-sempai-animegirl-heart-kawaii-cute-anime-girl.png')}}" alt="logo" class="logo">
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="{{url_for('calendar')}}" onclick="">Calendar</a></li>
+                    <li><a href="{{url_for('journal')}}">Journal</a></li>
+                    <li><a href="{{url_for('playlist')}}">Playlist</a></li>
+                    <li><a href="{{url_for('login')}}" >Login</a></li>
+                </ul>
+            </nav>
+            
+<div class="diaryWrap">
+
+    <div class="date-wrap">
+        <span>Date:</span>
+        <input type="date" class="date"/>
+    </div>
+    <!--copy paste this next part to add more lines
+    <div class="line-wrap">
+        <input type="text" class="line"/>
+    </div>
+
+    CURRENT LINE COUNT:10 actually idk 
+    -->
+    <div class="line-wrap">
+        <input type="text" class="line"/>
+    </div>
+    <div class="line-wrap">
+        <input type="text" class="line"/>
+    </div>
+    <div class="line-wrap">
+        <input type="text" class="line"/>
+    </div>
+    <div class="line-wrap">
+        <input type="text" class="line"/>
+    </div>
+    <div class="line-wrap">
+        <input type="text" class="line"/>
+    </div>
+    <div class="line-wrap">
+        <input type="text" class="line"/>
+    </div>
+    <div class="line-wrap">
+        <input type="text" class="line"/>
+    </div>
+    <div class="line-wrap">
+        <input type="text" class="line"/>
+    </div>
+    <div class="line-wrap">
+        <input type="text" class="line"/>
+    </div>
+    <div class="line-wrap">
+        <input type="text" class="line"/>
+    </div>
+    <div class="line-wrap">
+        <input type="text" class="line"/>
+    </div>
+    <div class="line-wrap">
+        <input type="text" class="line"/>
+    </div>
+
+
+
+    <button class="btn">Save entry</button>     
+    <button class="submit">Submit</button>                          <!--CAN CHANGE NAME OF BUTTON-->
+
+</div>
+
+    <!--JAVASCRIPT PART FOR THE BUTTON-->
+    <script>                                                                    //max length of lines 
+        const lines=document.querySelectorAll(".line");
+        const button=document.getElementsByClassName("btn")[0];
+        let save=true;
+
+        const saveEdit=()=>{  
+            if(save){
+                button.innerHTML='Edit';
+                save=false;
+            }else{
+                button.innerHTML='Save';
+                save=true;
+            }      
+            
+            button.classList.toggle("edit-btn");
+            lineControls();
+        }
+
+        const lineControls=()=>{
+           lines.forEach(line=>{
+               if(!save){
+                   line.setAttribute("disabled",true);
+               }else{
+                    line.removeAttribute("disabled");
+               }
+           });
+        }
+
+        const setLinesMaxWidth=()=>{
+            lines.forEach(line=>{
+                line.setAttribute("maxlength", line.offsetWidth/12);
+            });
+        }
+
+        setLinesMaxWidth();
+
+        button.addEventListener("click", saveEdit);
+
+        window.addEventListener("resize",setLinesMaxWidth);
+
+         
+    </script>
+    </header>
+    <br>
+   
+    
+</body>
+</html>
+
+
+    
+   

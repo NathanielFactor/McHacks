@@ -1,0 +1,22 @@
+-- schema.sql
+
+DROP TABLE IF EXISTS Calendar;
+DROP TABLE IF EXISTS JournalEntries;
+
+CREATE TABLE IF NOT EXISTS Calendar (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    userId TEXT NOT NULL,
+    Created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS JournalEntries (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    userId TEXT NOT NULL,
+    Created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    gptmood TEXT NOT NULL,
+    inputmood TEXT NOT NULL,
+    JournalEntry TEXT NOT NULL,
+    EntryDate TEXT NOT NULL,
+    CalendarId INTEGER, -- Example of a foreign key
+    FOREIGN KEY (CalendarId) REFERENCES Calendar(id)
+);

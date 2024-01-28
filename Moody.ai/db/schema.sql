@@ -14,7 +14,6 @@ CREATE TABLE IF NOT EXISTS JournalEntries (
     userId TEXT NOT NULL,
     Created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     gptmood TEXT NOT NULL,
-    inputmood TEXT NOT NULL,
     JournalEntry TEXT NOT NULL,
     EntryDate TEXT NOT NULL,
     CalendarId INTEGER, -- Example of a foreign key

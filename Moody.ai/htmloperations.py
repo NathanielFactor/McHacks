@@ -5,7 +5,7 @@ from bot import ai_response
 # Connect to the SQLite database
 
 def connect():
-    connection = sqlite3.connect('db/database.db')
+    connection = sqlite3.connect('database.db')
     cursor = connection.cursor()
     return connection, cursor
 
@@ -45,23 +45,28 @@ def addMessage(user_id, message):
     # Fetch id, and JournalEntry
 
     connection, cursor = connect()
-
+    entry_date = datetime.now().strftime('%Y-%m-%d')
+    
     response = ai_response(message)
-
 
     # Iterating through rows to get userID's
     if not checkTodayEntry(user_id):
         print(message)
         print(user_id)
-        cursor.execute("INSERT INTO JournalEntries (JournalEntry, userId) VALUES (?, ?)", (message, user_id,))
+        cursor.execute("INSERT INTO JournalEntries (JournalEntry, userId, EntryDate) VALUES (?, ?, ?)",
+               (message, user_id, entry_date))
+
+
         connection.commit()
         return True
     return False
 
 def gptResponse(user_id, message):
+    connection, cursor = connect()
     if addMessage(user_id, message):
         # Get ai response
         gptEmotion = ai_response(message)
+        print(gptEmotion)
 
         # Select id, journalentries
         cursor.execute("SELECT id, JournalEntry FROM JournalEntries")
@@ -86,7 +91,26 @@ def getResponse(user_id, entry_date):
         return row["JournalEntry"]
     else:
         return None
+    
+def get_messages_by_month(user_id, year, month):
+    # Connect to the SQLite database
+    connection, cursor = connect()
+
+    # Format year and month as 'YYYY-MM'
+    formatted_date = f'{year:04d}-{month:02d}'
+
+    # Execute the SQL query
+    query = "SELECT userId, gptmood, JournalEntry, EntryDate FROM JournalEntries WHERE userId = ? AND strftime('%Y-%m', EntryDate) = ?"
+    cursor.execute(query, (user_id, formatted_date))
+
+    # Fetch all the rows
+    rows = cursor.fetchall()
+
+    # Return the result
+    return rows
+
 
 # Close the database connection
 connection.commit()
 connection.close()
+

@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Calendar</title>
+    <title>Month View</title>
     <style>
         body {
             font-family: 'Times New Roman', sans-serif;
@@ -18,9 +17,10 @@
         }
 
         th, td {
-            border: 1px solid #8575a0;
+            border: 1px solid #d48af3;
             padding: 10px;
             text-align: center;
+            cursor: pointer;
         }
 
         th {
@@ -28,12 +28,12 @@
         }
 
         td {
-            cursor: pointer;
+    
             transition: background-color 0.3s;
         }
 
         td:hover {
-            background-color: #9d9898;
+            background-color: #ebe2ede2;
         }
     </style>
 </head>
@@ -41,7 +41,8 @@
 
     <h2> Moods This Month </h2>
 
-///
+<p id="currentMonth"></p>
+
 <script>
     // Get the current date
     const currentDate = new Date();
@@ -58,58 +59,35 @@
 
     // Display the current month in an HTML element
     const currentMonthElement = document.getElementById('currentMonth');
-    currentMonthElement.textContent = monthNames[currentMonth];
+    currentMonthElement.textContent =  monthNames[currentMonth];
 </script>
-////
-
 
 <div id="calendar-container"></div>
 
+<script src= "script.js" defer></script> <!--links javascript file to the html file-->
+
+<button id="calendarButton" onclick="generateCalendar()">Generate Calendar</button>
+
 <script>
-    function generateCalendar() {
-        const container = document.getElementById('calendar-container');
-        const currentDate = new Date();
-        const currentYear = currentDate.getFullYear();
-        const currentMonth = currentDate.getMonth();
+//input color is a string 
+function changeCellColor(color, dayOfMonth) {
 
-        const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
-        const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-
-        const table = document.createElement('table');
-        container.appendChild(table);
-
-        const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-        const headerRow = document.createElement('tr');
-        daysOfWeek.forEach(day => {
-            const th = document.createElement('th');
-            th.textContent = day;
-            headerRow.appendChild(th);
-        });
-        table.appendChild(headerRow);
-
-        let dayCounter = 1;
-        for (let i = 0; i < 6; i++) {
-            const row = document.createElement('tr');
-            for (let j = 0; j < 7; j++) {
-                const td = document.createElement('td');
-                if (i === 0 && j < firstDayOfMonth.getDay()) {
-                    td.textContent = '';
-                } else if (dayCounter <= daysInMonth) {
-                    td.textContent = dayCounter;
-                    td.addEventListener('click', function () {
-                        // Replace the URL with the actual page you want to navigate to
-                        window.location.href = 'page-for-day-' + dayCounter + '.html';
-                    });
-                    dayCounter++;
-                }
-                row.appendChild(td);
-            }
-            table.appendChild(row);
-        }
+    if (color == yellow) {
+        colorCode = '#f6ff76'
     }
+    if (color == blue) {
+        colorCode = '#7698ff'
+    }
+    if (color == red) {
+        colorCode = '#ea354d'
+    }
+    colorArray[dayOfMonth - 1] = colorCode;
 
-    generateCalendar();
+    generateCalendar(); //update cell color
+}
 </script>
+
 
 </body>
 </html>
+

@@ -8,6 +8,7 @@
         body {
             font-family:sans-serif;
             text-align: center;
+            background: url(https://i.pinimg.com/originals/df/28/76/df2876e38bbff18a1528cbdf58238dc5.gif) center/cover no-repeat fixed;
         }
 
         table {
@@ -16,21 +17,38 @@
             border-collapse: collapse;
         }
 
+
+
         th, td {
-            border: 1px solid #d48af3;
+            border: 1px solid #8e9af3;
             padding: 10px;
             text-align: center;
-            cursor: pointer;
+            cursor: pointer; 
+            transition: background-color 0.3s;
         }
 
         th {
-            background-color: #bb85c7db;
+            background-color: #4a57e3df;
         }
 
         td {
     
             transition: background-color 0.3s;
         }
+
+        /* Set the background color directly for each cell */
+        td.color1 { background-color: #ff9999; }
+        td.color2 { background-color: #ffcc99; }
+        td.color3 { background-color: #ffdb58; }
+        td.color4 { background-color: #a2cffe; }
+        td.color5 { background-color: #99ff99; }
+        td.color6 { background-color: #ffcccb; }
+        td.color7 { background-color: #c2f0c2; }
+        td.color8 { background-color: #ffb3b3; }
+        td.color9 { background-color: #99c2ff; }
+        td.color10 { background-color: #ffcc99; }
+        td.color11 { background-color: #c2f0c2; }
+        td.color12 { background-color: #ffdb58; }
 
         td:hover {
             background-color: #95ade7ce;
@@ -67,21 +85,14 @@
             overflow: auto;
         }
 
+        
+
         .close {
             position: absolute;
             top: 10px;
             right: 10px;
             cursor: pointer;
             font-size: 18px;
-        }
-
-        /* Sticky Note Styling */
-        .sticky-note {
-            background-color: #ffeb3b;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
     </style>

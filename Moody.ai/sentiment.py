@@ -65,9 +65,7 @@ def getAudioFeatures(sp):
 				features.append(audioFeatures[j]['danceability'])
 				features.append(audioFeatures[j]['energy'])
 				features.append(audioFeatures[j]['valence'])
-				features.append(audioFeatures[j]['tempo'])
 				features.append(audioFeatures[j]['loudness'])
-				features.append(audioFeatures[j]['speechiness'])
 				featuresTotal.append(features)
 			features = []
 	return data, featuresTotal

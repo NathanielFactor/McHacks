@@ -1,19 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href="css/playlist.css" rel="stylesheet" type="text/css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Playlist</title>
-
-    <div class="content">
-        <h2 class="text-shadows" style="font-family: Lucida Console, monospace;">Generate Recipes</h2>
-    </div>
-    
 </head>
 
 <body>
-    
-    <h1>Mood-based Spotify Playlist Generator</h1>
     
 <div id="content">
     <h2>Discover a playlist that matches your mood!</h2>
@@ -23,8 +17,14 @@
 <script>
     function generatePlaylist() {
         // Implement backend logic here (redirecting to Spotify is just for example purposes).
-        alert("Playlist generated! Redirecting to Spotify...");
-        // window.location.href = "/generatePlaylist";
+        var resultContainer = document.getElementById("result-container");
+        resultContainer.innerHTML = "Playlist generated! Redirecting to Spotify...";
+
+        // Simulate redirection after a delay (replace with actual logic)
+        setTimeout(function () {
+            // window.location.href = "/generatePlaylist";
+            resultContainer.innerHTML = ""; // Clear the result message
+        }, 2000); // 2000 milliseconds (2 seconds) delay, adjust as needed
     }
 </script>
 

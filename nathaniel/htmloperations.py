@@ -1,6 +1,6 @@
 import sqlite3
 from datetime import datetime
-from Nathaniel.bot import ai_response
+from bot import ai_response
 
 # Connect to the SQLite database
 connection = sqlite3.connect('your_database_file.db')

@@ -12,9 +12,6 @@ function generateCalendar() {
 
     const colorArray = [daysInMonth];  // set cell colors to white 
         
-    //for (let i=0; i< (daysInMonth - 1); i++) {
-    //        colorArray[i] = '#ffffff'  
-    //}
     const table = document.createElement('table');
     container.appendChild(table);
 
@@ -38,7 +35,7 @@ function generateCalendar() {
                 td.textContent = dayCounter;
 
                 td.style.backgroundColor = colorArray[dayCounter - 1]; //set background colour using colorArrray
-                
+                td.className = 'color' + dayCounter;
                 td.addEventListener('click', function () {
                     openModal(dayCounter);
                 });

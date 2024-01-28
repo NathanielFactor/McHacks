@@ -5,7 +5,7 @@ from bot import ai_response
 # Connect to the SQLite database
 
 def connect():
-    connection = sqlite3.connect('database.db')
+    connection = sqlite3.connect('db/database.db')
     cursor = connection.cursor()
     return connection, cursor
 
@@ -28,10 +28,10 @@ def addUser(user_id):
         # User already exists
         return False
 
-def checkTodayEntry(user_id):
+def checkTodayEntry(user_id, date):
     # Check if there is a journal entry for today's date
     connection, cursor = connect()
-    today = datetime.now().strftime('%Y-%m-%d')
+    today = date
     cursor.execute("SELECT COUNT(*) FROM JournalEntries WHERE EntryDate = ? AND userId = ?", (today, user_id))
     entry_count = cursor.fetchone()[0]
 
@@ -41,48 +41,32 @@ def checkTodayEntry(user_id):
     else:
         return True
 
-def addMessage(user_id, message):
+def addMessage(user_id, message, date):
     # Fetch id, and JournalEntry
 
     connection, cursor = connect()
-    entry_date = datetime.now().strftime('%Y-%m-%d')
     
     response = ai_response(message)
 
+    print(response)
+
     # Iterating through rows to get userID's
-    if not checkTodayEntry(user_id):
+    if not checkTodayEntry(user_id, date):
         print(message)
         print(user_id)
-        cursor.execute("INSERT INTO JournalEntries (JournalEntry, userId, EntryDate) VALUES (?, ?, ?)",
-               (message, user_id, entry_date))
-
-
-        connection.commit()
-        return True
-    return False
-
-def gptResponse(user_id, message):
-    connection, cursor = connect()
-    if addMessage(user_id, message):
-        # Get ai response
-        gptEmotion = ai_response(message)
-        print(gptEmotion)
-
-        # Select id, journalentries
-        cursor.execute("SELECT id, JournalEntry FROM JournalEntries")
-        rows = cursor.fetchall()
-
-        if rows is not None:
-            for row in rows:
-                Userid = row["id"]
-
-        for i in range(len(Userid)):
-            if user_id == Userid[i]:
-                # Insert new message for the specific user
-                cursor.execute("UPDATE JournalEntries SET gptmood = ? WHERE id = ?", (gptEmotion, Userid))
-
-        return gptEmotion
-
+        print("here")
+        cursor.execute("INSERT INTO JournalEntries (JournalEntry, userId, EntryDate, gptmood) VALUES (?, ?, ?, ?)",
+               (message, user_id, date, response))
+        
+    else:
+        print(message)
+        print(user_id)
+        print("there")
+        cursor.execute("UPDATE JournalEntries SET JournalEntry = ?, gptmood = ? WHERE userId = ? AND EntryDate = ?", (message, response, user_id, date))
+        
+    
+    connection.commit()
+    return True
 def getResponse(user_id, entry_date):
     cursor.execute("SELECT JournalEntry FROM JournalEntries WHERE id = ? AND EntryDate = ?", (user_id, entry_date))
     row = cursor.fetchone()

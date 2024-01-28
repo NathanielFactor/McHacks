@@ -12,16 +12,6 @@
             return false;  // Change to true if the user is logged in
         }
 
-        function updateLoginText() {
-            var loginLink = document.getElementById("login-link");
-
-            if (isLoggedIn()) {
-                loginLink.textContent = "Account";
-            } else {
-                loginLink.textContent = "Login";
-            }
-        }
-
         function loadContent(contentType) {
             // Load content dynamically based on the clicked link
             var container = document.getElementById("content-container");
@@ -36,9 +26,7 @@
         }
 
         // Update login text when the page loads
-        window.onload = function() {
-            updateLoginText();
-        };
+   
     </script>
 </head>
 
@@ -99,20 +87,21 @@
         td {
     
             transition: background-color 0.3s;
+            background-color: #c2f0c2;
         }
 
         /* Set the background color directly for each cell */
-        td.color1 { background-color: #ff9999; }
-        td.color2 { background-color: #ffcc99; }
-        td.color3 { background-color: #ffdb58; }
-        td.color4 { background-color: #a2cffe; }
-        td.color5 { background-color: #99ff99; }
-        td.color6 { background-color: #ffcccb; }
-        td.color7 { background-color: #c2f0c2; }
-        td.color8 { background-color: #ffb3b3; }
-        td.color9 { background-color: #99c2ff; }
-        td.color10 { background-color: #ffcc99; }
-        td.color11 { background-color: #c2f0c2; }
+        #td.color1 { background-color: #ff9999; }
+        #td.color2 { background-color: #ffcc99; }
+        #td.color3 { background-color: #ffdb58; }
+        #td.color4 { background-color: #a2cffe; }
+        #td.color5 { background-color: #99ff99; }
+        #td.color6 { background-color: #ffcccb; }
+        #td.color7 { background-color: #c2f0c2; }
+        #td.color8 { background-color: #ffb3b3; }
+        #td.color9 { background-color: #99c2ff; }
+        #td.color10 { background-color: #ffcc99; }
+        #td.color11 { background-color: #c2f0c2; }
         td.color12 { background-color: #ffdb58; }
 
         td:hover {
@@ -174,6 +163,7 @@
         <div class="modal-header">
             <span class="close" onclick="closeModal()">&times;</span>
             <h2>Your mood on this day: </h2>
+            <div id="moodText"></div>
         </div>
         <div class="modal-body">
             <p id="selectedDayText"></p>
@@ -205,11 +195,25 @@
 
 <div id="calendar-container"></div>
 
-<script src= "js/calender.js" defer></script> <!--links javascript file to the html file-->
-
-<button id="calendarButton" onclick="generateCalendar()">Generate Calendar</button>
-
 <script>
+
+function addEventListenersToDays() {
+    for (let dayCounter = 1; dayCounter <= 31; dayCounter++) {
+        const tdId =  dayCounter;
+        const td = document.getElementById(tdId);
+        
+        // Stop the loop if the element doesn't exist
+        if (!td) {
+            break;
+        }
+        
+        // If the element exists, add the event listener
+        td.addEventListener('click', function() {
+            openModal(dayCounter);
+        });
+    }
+}
+
 function generateCalendar() {
 
     const container = document.getElementById('calendar-container');
@@ -245,25 +249,41 @@ function generateCalendar() {
                 td.textContent = dayCounter;
 
                 td.style.backgroundColor = colorArray[dayCounter - 1]; //set background colour using colorArrray
-                td.className = 'color' + dayCounter;
-                td.addEventListener('click', function () {
-                    openModal(dayCounter);
-                });
+                td.id = dayCounter;
+                
                 dayCounter++;
+            } else if (dayCounter >= daysInMonth) {
+                break;
             }
             row.appendChild(td);
         }
         table.appendChild(row);
         }
-    handleButtonClick();
+    addEventListenersToDays();
 }
     
-    function openModal(selectedDay) {
-        const modal = document.getElementById('myModal');
-        const selectedDayText = document.getElementById('selectedDayText');
-        selectedDayText.textContent = "stuff";
-        modal.style.display = 'flex';
-    }
+function openModal(selectedDay) {
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = (currentDate.getMonth() + 1).toString().padStart(2, '0'); // Pad month with leading zero if necessary
+    const currentDay = document.getElementById(selectedDay).textContent.padStart(2, '0'); // Pad day with leading zero if necessary
+
+    console.log(currentYear, currentMonth, currentDay);
+    const selectedDate = `${currentYear}-${currentMonth}-${currentDay}`; // Construct the date string with padded month and day
+    console.log(selectedDate);
+    fetch(`/get_message?date=${selectedDate}`) // Adjust this endpoint as needed
+        .then(response => response.json())
+        .then(data => {
+            const modal = document.getElementById('myModal');
+            const selectedDayText = document.getElementById('selectedDayText');
+            const selectedMood = document.getElementById('moodText');
+            selectedDayText.textContent = data.message; // Set the modal text to the message fetched
+            selectedMood.textContent = data.mood;
+            modal.style.display = 'flex';
+        })
+        .catch(error => {
+            console.error('Error fetching message:', error);
+        });
+}
     
     function closeModal() {
         const modal = document.getElementById('myModal');
@@ -289,18 +309,6 @@ function generateCalendar() {
     }
     
     
-    function handleButtonClick() {
-        document.getElementById("calendarButton").disabled = true;
-    
-       
-    }
-    
-    function enableButtonClick() {
-        document.getElementById("calendarButton").disabled = false;
-        
-    } 
-    
-    
 //input color is a string 
 function changeCellColor(color, dayOfMonth) {
 
@@ -317,6 +325,11 @@ function changeCellColor(color, dayOfMonth) {
 
     generateCalendar(); //update cell color
 }
+
+document.addEventListener("DOMContentLoaded", function(arg) {
+    generateCalendar();
+});
+
 </script>
 
 

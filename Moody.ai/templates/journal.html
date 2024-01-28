@@ -29,7 +29,7 @@
 
     <div class="date-wrap">
         <span>Date:</span>
-        <input type="date" class="date"/>
+        <input type="date" id="date" class="date"/>
     </div>
     <!--copy paste this next part to add more lines
     <div class="line-wrap">
@@ -78,7 +78,7 @@
 
 
     <button class="btn">Save entry</button>     
-    <button class="submit">Submit</button>                          <!--CAN CHANGE NAME OF BUTTON-->
+    <button class="submit" onclick="submitEntry()">Submit</button>                          <!--CAN CHANGE NAME OF BUTTON-->
 
 </div>
 
@@ -87,11 +87,49 @@
         const lines=document.querySelectorAll(".line");
         const button=document.getElementsByClassName("btn")[0];
         let save=true;
+        
 
+        function submitEntry(){
+            var concatenatedValues = concatenateInputValues();
+            const dateInput = document.getElementById('date').value;
+            console.log("hi");
+            if (concatenatedValues && concatenatedValues.trim() !== '' && dateInput && dateInput.trim() !== '') {
+            // If both conditions are true, proceed with the save
+            console.log("hey")
+            if (!save) {
+                console.log("hi")
+                fetch('/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ date: dateInput, concatenatedValues: concatenatedValues }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                    if (data['success']) {
+                    window.location.href = '/playlist';
+                }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+            }
+        } else {
+            // Log error or alert user if concatenatedValues or dateInput is empty
+            console.error('Error: concatenatedValues or dateInput is empty.');
+        }
+
+        };
+
+       
         const saveEdit=()=>{  
             if(save){
                 button.innerHTML='Edit';
                 save=false;
+                concatenatedValues = concatenateInputValues();
+                console.log(concatenatedValues);
             }else{
                 button.innerHTML='Save';
                 save=true;
@@ -113,7 +151,7 @@
 
         const setLinesMaxWidth=()=>{
             lines.forEach(line=>{
-                line.setAttribute("maxlength", line.offsetWidth/12);
+                line.setAttribute("maxlength", Math.floor(window.innerWidth));
             });
         }
 
@@ -122,6 +160,53 @@
         button.addEventListener("click", saveEdit);
 
         window.addEventListener("resize",setLinesMaxWidth);
+// Select all input elements with the class 'line'
+// Select all input elements with the class 'line'
+const inputs = document.querySelectorAll('.line-wrap .line');
+
+// Function to initialize the behavior
+function initializeInputBehavior() {
+    inputs.forEach((input, index) => {
+        input.addEventListener('keydown', function(event) {
+            // Move to the next input on 'Enter'
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Prevent the default Enter key behavior
+                const nextInput = inputs[index + 1];
+                if (nextInput) {
+                    nextInput.focus(); // Move focus to the next input
+                }
+            }
+
+            // Move to the previous input on 'Backspace' if the current input is empty
+            if (event.key === 'Backspace' && input.value === '') {
+                event.preventDefault(); // Prevent the default Backspace key behavior
+                const previousInput = inputs[index - 1];
+                if (previousInput) {
+                    previousInput.focus(); // Move focus to the previous input
+                }
+            }
+        });
+    });
+}
+
+// Initialize the input behavior when the page loads
+document.addEventListener('DOMContentLoaded', initializeInputBehavior);
+
+
+function concatenateInputValues() {
+    const inputs = document.querySelectorAll('.line-wrap .line');
+    // Use Array.from to convert NodeList to Array to use map, then join to concatenate
+    return Array.from(inputs).map(input => input.value).join('');
+}
+
+// You can call this function whenever you need the concatenated value
+
+    setInterval(() => {
+    const concatenatedValues = concatenateInputValues();
+    console.log(concatenatedValues);
+}, 1000);
+
+
 
          
     </script>
